@@ -13,12 +13,37 @@ namespace WindowsFormsProgramming
 {
     public partial class MainForm : Form
     {
+
+        #region Fields
+
+        private int _selectedImageMode = 0;
+        private PictureBoxSizeMode[] _modeMenuArray = new PictureBoxSizeMode[]
+        {
+            PictureBoxSizeMode.StretchImage,
+            PictureBoxSizeMode.Normal,
+            PictureBoxSizeMode.Zoom
+        }; 
+
+        #endregion
+
+        #region Constructors
+
         public MainForm()
         {
             InitializeComponent();
             Version ver = new Version(Application.ProductVersion);
             Text = String.Format("My photos. Version {0:#}.{1:#}", ver.Major, ver.Minor);
         }
+
+        #endregion
+
+        #region Properties
+
+        
+
+        #endregion
+
+        #region Event handlers
 
         private void menuLoad_Click(object sender, EventArgs e)
         {
@@ -42,5 +67,24 @@ namespace WindowsFormsProgramming
                 }
             }
         }
+
+        private void menuExit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        protected void menuImage_ChildClick(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+
+            if (item != null)
+            {
+                _selectedImageMode = (item.OwnerItem as ToolStripMenuItem).DropDownItems.IndexOf(item);
+                pbxPhoto.SizeMode = _modeMenuArray[_selectedImageMode];
+                pbxPhoto.Invalidate();
+            }
+        }
+
+        #endregion
     }
 }
