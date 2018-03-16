@@ -14,6 +14,7 @@ namespace WindowsFormsProgramming
         [STAThread]
         static void Main()
         {
+            //test comment
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
