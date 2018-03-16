@@ -35,6 +35,9 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuView = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuImage = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrechToFit = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuActualSize = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPhoto)).BeginInit();
             this.menuMain.SuspendLayout();
             this.SuspendLayout();
@@ -45,7 +48,7 @@
             this.pbxPhoto.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbxPhoto.Location = new System.Drawing.Point(0, 24);
             this.pbxPhoto.Name = "pbxPhoto";
-            this.pbxPhoto.Size = new System.Drawing.Size(284, 237);
+            this.pbxPhoto.Size = new System.Drawing.Size(444, 359);
             this.pbxPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbxPhoto.TabIndex = 1;
             this.pbxPhoto.TabStop = false;
@@ -57,7 +60,7 @@
             this.menuView});
             this.menuMain.Location = new System.Drawing.Point(0, 0);
             this.menuMain.Name = "menuMain";
-            this.menuMain.Size = new System.Drawing.Size(284, 24);
+            this.menuMain.Size = new System.Drawing.Size(444, 24);
             this.menuMain.TabIndex = 2;
             this.menuMain.Text = "menuStrip1";
             // 
@@ -75,35 +78,59 @@
             // 
             this.menuLoad.Name = "menuLoad";
             this.menuLoad.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.menuLoad.Size = new System.Drawing.Size(152, 22);
+            this.menuLoad.Size = new System.Drawing.Size(180, 22);
             this.menuLoad.Text = "&Load";
+            this.menuLoad.Click += new System.EventHandler(this.menuLoad_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(137, 6);
             // 
             // menuExit
             // 
             this.menuExit.Name = "menuExit";
-            this.menuExit.Size = new System.Drawing.Size(152, 22);
+            this.menuExit.Size = new System.Drawing.Size(140, 22);
             this.menuExit.Text = "Exit";
             // 
             // menuView
             // 
+            this.menuView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuImage});
             this.menuView.Name = "menuView";
             this.menuView.Size = new System.Drawing.Size(44, 20);
             this.menuView.Text = "&View";
+            // 
+            // menuImage
+            // 
+            this.menuImage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrechToFit,
+            this.menuActualSize});
+            this.menuImage.Name = "menuImage";
+            this.menuImage.Size = new System.Drawing.Size(180, 22);
+            this.menuImage.Text = "&Image";
+            // 
+            // menuStrechToFit
+            // 
+            this.menuStrechToFit.Name = "menuStrechToFit";
+            this.menuStrechToFit.Size = new System.Drawing.Size(180, 22);
+            this.menuStrechToFit.Text = "Stretch to fit";
+            // 
+            // menuActualSize
+            // 
+            this.menuActualSize.Name = "menuActualSize";
+            this.menuActualSize.Size = new System.Drawing.Size(180, 22);
+            this.menuActualSize.Text = "Actual size";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(444, 383);
             this.Controls.Add(this.pbxPhoto);
             this.Controls.Add(this.menuMain);
             this.MainMenuStrip = this.menuMain;
-            this.MaximumSize = new System.Drawing.Size(300, 300);
+            this.MinimumSize = new System.Drawing.Size(460, 422);
             this.Name = "MainForm";
             this.Text = "My photos";
             ((System.ComponentModel.ISupportInitialize)(this.pbxPhoto)).EndInit();
@@ -122,6 +149,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem menuExit;
         private System.Windows.Forms.ToolStripMenuItem menuView;
+        private System.Windows.Forms.ToolStripMenuItem menuImage;
+        private System.Windows.Forms.ToolStripMenuItem menuStrechToFit;
+        private System.Windows.Forms.ToolStripMenuItem menuActualSize;
     }
 }
 
