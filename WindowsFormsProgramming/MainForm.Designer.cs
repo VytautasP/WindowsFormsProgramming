@@ -50,7 +50,7 @@
             this.pbxPhoto.Location = new System.Drawing.Point(0, 24);
             this.pbxPhoto.Name = "pbxPhoto";
             this.pbxPhoto.Size = new System.Drawing.Size(444, 359);
-            this.pbxPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbxPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxPhoto.TabIndex = 1;
             this.pbxPhoto.TabStop = false;
             // 
@@ -112,6 +112,7 @@
             this.menuImage.Name = "menuImage";
             this.menuImage.Size = new System.Drawing.Size(180, 22);
             this.menuImage.Text = "&Image";
+            this.menuImage.DropDownOpening += new System.EventHandler(this.menuImage_Popup);
             // 
             // menuStrechToFit
             // 

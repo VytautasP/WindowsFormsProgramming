@@ -85,6 +85,23 @@ namespace WindowsFormsProgramming
             }
         }
 
+        protected void menuImage_Popup(object sender, EventArgs e)
+        {
+            ToolStripMenuItem parentMenu = sender as ToolStripMenuItem;
+
+            if (parentMenu != null)
+            {
+                bool imageLoaded = pbxPhoto.Image != null;
+
+                foreach (ToolStripMenuItem item in parentMenu.DropDownItems)
+                {
+                    item.Enabled = imageLoaded;
+                    item.Checked = _selectedImageMode ==
+                                   (item.OwnerItem as ToolStripMenuItem).DropDownItems.IndexOf(item) && imageLoaded;
+                }
+            }
+        }
+
         #endregion
     }
 }
