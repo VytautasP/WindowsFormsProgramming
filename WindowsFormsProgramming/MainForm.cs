@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsProgramming.Controls.Helpers;
 
 namespace WindowsFormsProgramming
 {
@@ -108,7 +109,7 @@ namespace WindowsFormsProgramming
         {
             foreach (ToolStripMenuItem menuItem in menuView.DropDownItems)
             {
-                ctxMenuView.Items.Add(menuItem);
+                ctxMenuView.Items.Add(ToolStripMenuItemHelper.CloneToolStripMenuItem(menuItem));
             }
         }
 
