@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,15 +13,20 @@ namespace WindowsFormsProgramming.Controls.Helpers
     {
         public static ToolStripMenuItem CloneToolStripMenuItem(ToolStripMenuItem itemToClone)
         {
-            //TODO :
-            // Copy Event Handlers to Clone item
 
             ToolStripMenuItem clonedItem = new ToolStripMenuItem();
 
-            var itemToCloneEvents = clonedItem.GetType().GetEvents();
+            PropertyInfo itemToClonePropertyInfo = itemToClone.GetType().GetProperty("Events",
+                BindingFlags.NonPublic | BindingFlags.Instance);
 
-            var clonedItemEvents = clonedItem.GetType().GetEvents();
-            clonedItemEvents = itemToCloneEvents;
+            EventHandlerList itemToCloneEventHandlerList = (EventHandlerList)itemToClonePropertyInfo.GetValue(itemToClone, null);
+
+            PropertyInfo clonedItemPropertyInfo = clonedItem.GetType().GetProperty("Events",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+
+            EventHandlerList clonedItemEventHandlerList = (EventHandlerList)clonedItemPropertyInfo.GetValue(clonedItem, null);
+
+            clonedItemEventHandlerList.AddHandlers(itemToCloneEventHandlerList);
 
             clonedItem.AccessibleName = itemToClone.AccessibleName;
             clonedItem.AccessibleRole = itemToClone.AccessibleRole;
