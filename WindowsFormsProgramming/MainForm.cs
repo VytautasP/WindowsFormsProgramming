@@ -33,6 +33,8 @@ namespace WindowsFormsProgramming
             InitializeComponent();
             Version ver = new Version(Application.ProductVersion);
             Text = String.Format("My photos. Version {0:#}.{1:#}", ver.Major, ver.Minor);
+
+            InitContextViewMenu();
         }
 
         #endregion
@@ -75,9 +77,7 @@ namespace WindowsFormsProgramming
 
         protected void menuImage_ChildClick(object sender, EventArgs e)
         {
-            ToolStripMenuItem item = sender as ToolStripMenuItem;
-
-            if (item != null)
+            if (sender is ToolStripMenuItem item)
             {
                 _selectedImageMode = (item.OwnerItem as ToolStripMenuItem).DropDownItems.IndexOf(item);
                 pbxPhoto.SizeMode = _modeMenuArray[_selectedImageMode];
@@ -87,9 +87,7 @@ namespace WindowsFormsProgramming
 
         protected void menuImage_Popup(object sender, EventArgs e)
         {
-            ToolStripMenuItem parentMenu = sender as ToolStripMenuItem;
-
-            if (parentMenu != null)
+            if (sender is ToolStripMenuItem parentMenu)
             {
                 bool imageLoaded = pbxPhoto.Image != null;
 
@@ -99,6 +97,18 @@ namespace WindowsFormsProgramming
                     item.Checked = _selectedImageMode ==
                                    (item.OwnerItem as ToolStripMenuItem).DropDownItems.IndexOf(item) && imageLoaded;
                 }
+            }
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void InitContextViewMenu()
+        {
+            foreach (ToolStripMenuItem menuItem in menuView.DropDownItems)
+            {
+                ctxMenuView.Items.Add(menuItem);
             }
         }
 
