@@ -58,10 +58,16 @@ namespace WindowsFormsProgramming
             {
                 try
                 {
+                    toolStripStatusLabel1.Text = "Loading file " + dlg.FileName;
+
                     pbxPhoto.Image = new Bitmap(dlg.FileName);
+
+                    toolStripStatusLabel1.Text = "Loaded " + dlg.FileName;
                 }
                 catch (Exception exception)
                 {
+                    toolStripStatusLabel1.Text = "Unable to load " + dlg.FileName;
+
                     MessageBox.Show("Unable to load file: " + exception.Message);
                 }
                 finally

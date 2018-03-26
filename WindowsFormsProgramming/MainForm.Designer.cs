@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pbxPhoto = new System.Windows.Forms.PictureBox();
+            this.ctxMenuView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuMain = new System.Windows.Forms.MenuStrip();
             this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.menuLoad = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,9 +41,11 @@
             this.menuStrechToFit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuActualSize = new System.Windows.Forms.ToolStripMenuItem();
             this.menuZoom = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctxMenuView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPhoto)).BeginInit();
             this.menuMain.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pbxPhoto
@@ -56,6 +59,11 @@
             this.pbxPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxPhoto.TabIndex = 1;
             this.pbxPhoto.TabStop = false;
+            // 
+            // ctxMenuView
+            // 
+            this.ctxMenuView.Name = "ctxMenuView";
+            this.ctxMenuView.Size = new System.Drawing.Size(61, 4);
             // 
             // menuMain
             // 
@@ -138,16 +146,29 @@
             this.menuZoom.Text = "Zoom";
             this.menuZoom.Click += new System.EventHandler(this.menuImage_ChildClick);
             // 
-            // ctxMenuView
+            // statusStrip1
             // 
-            this.ctxMenuView.Name = "ctxMenuView";
-            this.ctxMenuView.Size = new System.Drawing.Size(61, 4);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 361);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(444, 22);
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "Ready";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(39, 17);
+            this.toolStripStatusLabel1.Text = "Ready";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(444, 383);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.pbxPhoto);
             this.Controls.Add(this.menuMain);
             this.MainMenuStrip = this.menuMain;
@@ -157,6 +178,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbxPhoto)).EndInit();
             this.menuMain.ResumeLayout(false);
             this.menuMain.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,6 +198,8 @@
         private System.Windows.Forms.ToolStripMenuItem menuActualSize;
         private System.Windows.Forms.ToolStripMenuItem menuZoom;
         private System.Windows.Forms.ContextMenuStrip ctxMenuView;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 
