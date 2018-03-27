@@ -63,6 +63,8 @@ namespace WindowsFormsProgramming
                     pbxPhoto.Image = new Bitmap(dlg.FileName);
 
                     sbpnlFileName.Text = "Loaded " + dlg.FileName;
+                    sbpnlImageSize.Text = String.Format("{0:#}x{1:#}", pbxPhoto.Image.Width, pbxPhoto.Image.Height);
+                    sbpnlImagePercent.Invalidate();
                 }
                 catch (Exception exception)
                 {
@@ -89,6 +91,7 @@ namespace WindowsFormsProgramming
                 _selectedImageMode = (item.OwnerItem as ToolStripMenuItem).DropDownItems.IndexOf(item);
                 pbxPhoto.SizeMode = _modeMenuArray[_selectedImageMode];
                 pbxPhoto.Invalidate();
+                sbpnlImagePercent.Invalidate();
             }
         }
 
@@ -130,5 +133,25 @@ namespace WindowsFormsProgramming
         }
 
         #endregion
+
+        private void sbpnlImagePercent_Paint(object sender, PaintEventArgs e)
+        {
+            int percent = 100;
+
+            if (pbxPhoto.Image != null)
+            {
+                Rectangle dr = pbxPhoto.ClientRectangle;
+                int imgWidth = pbxPhoto.Image.Width;
+                int imgHeight = pbxPhoto.Image.Height;
+
+                percent = 100 * Math.Min(dr.Width, imgWidth) * Math.Min(dr.Height, imgHeight) / (imgWidth * imgHeight);
+
+                Rectangle percentRect = e.ClipRectangle;
+                percentRect.Width = e.ClipRectangle.Width * percent / 100;
+
+                e.Graphics.FillRectangle(Brushes.DarkGoldenrod, percentRect);
+                e.Graphics.DrawString(percent.ToString() + "%", (sender as ToolStripStatusLabel).Font, Brushes.White, e.ClipRectangle);
+            }
+        }
     }
 }
