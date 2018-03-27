@@ -58,15 +58,15 @@ namespace WindowsFormsProgramming
             {
                 try
                 {
-                    toolStripStatusLabel1.Text = "Loading file " + dlg.FileName;
+                    sbpnlFileName.Text = "Loading file " + dlg.FileName;
 
                     pbxPhoto.Image = new Bitmap(dlg.FileName);
 
-                    toolStripStatusLabel1.Text = "Loaded " + dlg.FileName;
+                    sbpnlFileName.Text = "Loaded " + dlg.FileName;
                 }
                 catch (Exception exception)
                 {
-                    toolStripStatusLabel1.Text = "Unable to load " + dlg.FileName;
+                    sbpnlFileName.Text = "Unable to load " + dlg.FileName;
 
                     MessageBox.Show("Unable to load file: " + exception.Message);
                 }
@@ -105,6 +105,16 @@ namespace WindowsFormsProgramming
                                    (item.OwnerItem as ToolStripMenuItem).DropDownItems.IndexOf(item) && imageLoaded;
                 }
             }
+        }
+
+        private void menuStrip_OnMouseEnter(object sender, EventArgs e)
+        {
+            sbpnlFileName.Text = (sender as ToolStripMenuItem)?.ToolTipText;
+        }
+
+        private void menuStrip_OnMouseLeave(object sender, EventArgs e)
+        {
+            sbpnlFileName.Text = "";
         }
 
         #endregion

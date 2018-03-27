@@ -42,7 +42,9 @@
             this.menuActualSize = new System.Windows.Forms.ToolStripMenuItem();
             this.menuZoom = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.sbpnlFileName = new System.Windows.Forms.ToolStripStatusLabel();
+            this.sbpnlImageSize = new System.Windows.Forms.ToolStripStatusLabel();
+            this.sbpnlImagePercent = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPhoto)).BeginInit();
             this.menuMain.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -90,21 +92,27 @@
             // 
             this.menuLoad.Name = "menuLoad";
             this.menuLoad.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.menuLoad.Size = new System.Drawing.Size(140, 22);
+            this.menuLoad.Size = new System.Drawing.Size(180, 22);
             this.menuLoad.Text = "&Load";
+            this.menuLoad.ToolTipText = "Loads file from a system directory";
             this.menuLoad.Click += new System.EventHandler(this.menuLoad_Click);
+            this.menuLoad.MouseEnter += new System.EventHandler(this.menuStrip_OnMouseEnter);
+            this.menuLoad.MouseLeave += new System.EventHandler(this.menuStrip_OnMouseLeave);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(137, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
             // 
             // menuExit
             // 
             this.menuExit.Name = "menuExit";
-            this.menuExit.Size = new System.Drawing.Size(140, 22);
+            this.menuExit.Size = new System.Drawing.Size(180, 22);
             this.menuExit.Text = "Exit";
+            this.menuExit.ToolTipText = "Exits the application";
             this.menuExit.Click += new System.EventHandler(this.menuExit_Click);
+            this.menuExit.MouseEnter += new System.EventHandler(this.menuStrip_OnMouseEnter);
+            this.menuExit.MouseLeave += new System.EventHandler(this.menuStrip_OnMouseLeave);
             // 
             // menuView
             // 
@@ -113,6 +121,9 @@
             this.menuView.Name = "menuView";
             this.menuView.Size = new System.Drawing.Size(44, 20);
             this.menuView.Text = "&View";
+            this.menuView.ToolTipText = "Application view properties";
+            this.menuView.MouseEnter += new System.EventHandler(this.menuStrip_OnMouseEnter);
+            this.menuView.MouseLeave += new System.EventHandler(this.menuStrip_OnMouseLeave);
             // 
             // menuImage
             // 
@@ -121,47 +132,80 @@
             this.menuActualSize,
             this.menuZoom});
             this.menuImage.Name = "menuImage";
-            this.menuImage.Size = new System.Drawing.Size(107, 22);
+            this.menuImage.Size = new System.Drawing.Size(180, 22);
             this.menuImage.Text = "&Image";
+            this.menuImage.ToolTipText = "Adjust image display mode";
             this.menuImage.DropDownOpening += new System.EventHandler(this.menuImage_Popup);
+            this.menuImage.MouseEnter += new System.EventHandler(this.menuStrip_OnMouseEnter);
+            this.menuImage.MouseLeave += new System.EventHandler(this.menuStrip_OnMouseLeave);
             // 
             // menuStrechToFit
             // 
             this.menuStrechToFit.Name = "menuStrechToFit";
-            this.menuStrechToFit.Size = new System.Drawing.Size(139, 22);
+            this.menuStrechToFit.Size = new System.Drawing.Size(180, 22);
             this.menuStrechToFit.Text = "Stretch to fit";
             this.menuStrechToFit.Click += new System.EventHandler(this.menuImage_ChildClick);
             // 
             // menuActualSize
             // 
             this.menuActualSize.Name = "menuActualSize";
-            this.menuActualSize.Size = new System.Drawing.Size(139, 22);
+            this.menuActualSize.Size = new System.Drawing.Size(180, 22);
             this.menuActualSize.Text = "Actual size";
             this.menuActualSize.Click += new System.EventHandler(this.menuImage_ChildClick);
             // 
             // menuZoom
             // 
             this.menuZoom.Name = "menuZoom";
-            this.menuZoom.Size = new System.Drawing.Size(139, 22);
+            this.menuZoom.Size = new System.Drawing.Size(180, 22);
             this.menuZoom.Text = "Zoom";
             this.menuZoom.Click += new System.EventHandler(this.menuImage_ChildClick);
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.sbpnlFileName,
+            this.sbpnlImageSize,
+            this.sbpnlImagePercent});
             this.statusStrip1.Location = new System.Drawing.Point(0, 361);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(444, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "Ready";
             // 
-            // toolStripStatusLabel1
+            // sbpnlFileName
             // 
-            this.toolStripStatusLabel1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(39, 17);
-            this.toolStripStatusLabel1.Text = "Ready";
+            this.sbpnlFileName.AutoSize = false;
+            this.sbpnlFileName.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.sbpnlFileName.Name = "sbpnlFileName";
+            this.sbpnlFileName.Size = new System.Drawing.Size(210, 17);
+            this.sbpnlFileName.Spring = true;
+            this.sbpnlFileName.Text = "Ready";
+            this.sbpnlFileName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.sbpnlFileName.ToolTipText = "Image file name";
+            // 
+            // sbpnlImageSize
+            // 
+            this.sbpnlImageSize.AutoSize = false;
+            this.sbpnlImageSize.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.sbpnlImageSize.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken;
+            this.sbpnlImageSize.Name = "sbpnlImageSize";
+            this.sbpnlImageSize.Size = new System.Drawing.Size(90, 17);
+            this.sbpnlImageSize.Text = "600x900";
+            this.sbpnlImageSize.ToolTipText = "Image Size";
+            // 
+            // sbpnlImagePercent
+            // 
+            this.sbpnlImagePercent.AutoSize = false;
+            this.sbpnlImagePercent.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.sbpnlImagePercent.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken;
+            this.sbpnlImagePercent.Name = "sbpnlImagePercent";
+            this.sbpnlImagePercent.Size = new System.Drawing.Size(130, 17);
+            this.sbpnlImagePercent.Text = "toolStripStatusLabel1";
+            this.sbpnlImagePercent.ToolTipText = "Percent of image shown";
             // 
             // MainForm
             // 
@@ -199,7 +243,9 @@
         private System.Windows.Forms.ToolStripMenuItem menuZoom;
         private System.Windows.Forms.ContextMenuStrip ctxMenuView;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel sbpnlFileName;
+        private System.Windows.Forms.ToolStripStatusLabel sbpnlImageSize;
+        private System.Windows.Forms.ToolStripStatusLabel sbpnlImagePercent;
     }
 }
 
