@@ -105,7 +105,10 @@ namespace Extensions.PhotoAlbum
         {
             List.CopyTo(array, index);
         }
-
+        public virtual void Add(Photograph photo)
+        {
+            List.Add(photo);
+        }
         public virtual bool Contains(Photograph photo)
         {
             return List.Contains(photo);

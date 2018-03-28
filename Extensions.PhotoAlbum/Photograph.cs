@@ -23,9 +23,10 @@ namespace Extensions.PhotoAlbum
 
         #region Constructors
 
-        public Photograph()
+        public Photograph(string fileName)
         {
-            
+            _fileName = fileName;
+            _bitmap = null;
         }
 
         #endregion

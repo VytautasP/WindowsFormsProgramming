@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsProgramming.Controls.Helpers;
+using Extensions.PhotoAlbum;
 
 namespace WindowsFormsProgramming
 {
@@ -17,6 +18,8 @@ namespace WindowsFormsProgramming
 
         #region Fields
 
+        protected PhotoAlbum _album;
+        protected bool _albumChanged = false;
         private int _selectedImageMode = 0;
         private PictureBoxSizeMode[] _modeMenuArray = new PictureBoxSizeMode[]
         {
@@ -36,35 +39,53 @@ namespace WindowsFormsProgramming
             Text = String.Format("My photos. Version {0:#}.{1:#}", ver.Major, ver.Minor);
 
             InitContextViewMenu();
+
+            _album = new PhotoAlbum();
         }
 
         #endregion
 
         #region Properties
 
-        
+
 
         #endregion
 
         #region Event handlers
 
-        private void menuLoad_Click(object sender, EventArgs e)
+        #region menuEdit
+
+        private void menuAdd_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Title = "Add photos to the album";
+            dlg.Multiselect = true;
             dlg.Filter = ".JPG(.jpg)|*.jpg|.PNG(.png)|*.png|All files(*.*)|*.*";
             dlg.CheckFileExists = true;
+            dlg.InitialDirectory = Environment.CurrentDirectory;
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    sbpnlFileName.Text = "Loading file " + dlg.FileName;
+                    string[] fileNames = dlg.FileNames;
 
-                    pbxPhoto.Image = new Bitmap(dlg.FileName);
+                    sbpnlFileName.Text = $"Loading {fileNames.Length} files";
 
-                    sbpnlFileName.Text = "Loaded " + dlg.FileName;
-                    sbpnlImageSize.Text = String.Format("{0:#}x{1:#}", pbxPhoto.Image.Width, pbxPhoto.Image.Height);
-                    sbpnlImagePercent.Invalidate();
+                    int index = 0;
+                    foreach (var fileName in fileNames)
+                    {
+                        Photograph p = new Photograph(fileName);
+                        index = _album.IndexOf(p);
+
+                        if (index < 0)
+                        {
+                            _album.Add(p);
+                            _albumChanged = true;
+                        }
+                    }
+
+
                 }
                 catch (Exception exception)
                 {
@@ -76,13 +97,35 @@ namespace WindowsFormsProgramming
                 {
                     dlg.Dispose();
                 }
+
+                Invalidate();
             }
         }
+
+        private void menuRemove_Click(object sender, EventArgs e)
+        {
+            if (_album.Count > 0)
+            {
+                _album.RemoveAt(_album.CurrentPosition);
+                _albumChanged = true;
+
+                Invalidate();
+            }
+        }
+
+        #endregion
+
+        #region menuFile
 
         private void menuExit_Click(object sender, EventArgs e)
         {
             Close();
         }
+
+
+        #endregion
+
+        #region menuView
 
         protected void menuImage_ChildClick(object sender, EventArgs e)
         {
@@ -110,6 +153,32 @@ namespace WindowsFormsProgramming
             }
         }
 
+        #endregion
+
+        #region statusBar Panel
+
+        private void sbpnlImagePercent_Paint(object sender, PaintEventArgs e)
+        {
+            int percent = 100;
+
+            if (pbxPhoto.Image != null)
+            {
+                Rectangle dr = pbxPhoto.ClientRectangle;
+                int imgWidth = pbxPhoto.Image.Width;
+                int imgHeight = pbxPhoto.Image.Height;
+
+                percent = 100 * Math.Min(dr.Width, imgWidth) * Math.Min(dr.Height, imgHeight) / (imgWidth * imgHeight);
+
+                Rectangle percentRect = e.ClipRectangle;
+                percentRect.Width = e.ClipRectangle.Width * percent / 100;
+
+                e.Graphics.FillRectangle(Brushes.DarkGoldenrod, percentRect);
+                e.Graphics.DrawString(percent.ToString() + "%", (sender as ToolStripStatusLabel).Font, Brushes.White, e.ClipRectangle);
+            }
+        }
+
+        #endregion
+
         private void menuStrip_OnMouseEnter(object sender, EventArgs e)
         {
             sbpnlFileName.Text = (sender as ToolStripMenuItem)?.ToolTipText;
@@ -134,24 +203,5 @@ namespace WindowsFormsProgramming
 
         #endregion
 
-        private void sbpnlImagePercent_Paint(object sender, PaintEventArgs e)
-        {
-            int percent = 100;
-
-            if (pbxPhoto.Image != null)
-            {
-                Rectangle dr = pbxPhoto.ClientRectangle;
-                int imgWidth = pbxPhoto.Image.Width;
-                int imgHeight = pbxPhoto.Image.Height;
-
-                percent = 100 * Math.Min(dr.Width, imgWidth) * Math.Min(dr.Height, imgHeight) / (imgWidth * imgHeight);
-
-                Rectangle percentRect = e.ClipRectangle;
-                percentRect.Width = e.ClipRectangle.Width * percent / 100;
-
-                e.Graphics.FillRectangle(Brushes.DarkGoldenrod, percentRect);
-                e.Graphics.DrawString(percent.ToString() + "%", (sender as ToolStripStatusLabel).Font, Brushes.White, e.ClipRectangle);
-            }
-        }
     }
 }
