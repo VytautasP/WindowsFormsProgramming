@@ -54,6 +54,7 @@
             this.sbpnlFileName = new System.Windows.Forms.ToolStripStatusLabel();
             this.sbpnlImageSize = new System.Windows.Forms.ToolStripStatusLabel();
             this.sbpnlImagePercent = new System.Windows.Forms.ToolStripStatusLabel();
+            this.sbpnlFileIndex = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPhoto)).BeginInit();
             this.menuMain.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -66,7 +67,7 @@
             this.pbxPhoto.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbxPhoto.Location = new System.Drawing.Point(0, 24);
             this.pbxPhoto.Name = "pbxPhoto";
-            this.pbxPhoto.Size = new System.Drawing.Size(444, 359);
+            this.pbxPhoto.Size = new System.Drawing.Size(494, 467);
             this.pbxPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxPhoto.TabIndex = 1;
             this.pbxPhoto.TabStop = false;
@@ -84,7 +85,7 @@
             this.menuView});
             this.menuMain.Location = new System.Drawing.Point(0, 0);
             this.menuMain.Name = "menuMain";
-            this.menuMain.Size = new System.Drawing.Size(444, 24);
+            this.menuMain.Size = new System.Drawing.Size(494, 24);
             this.menuMain.TabIndex = 2;
             this.menuMain.Text = "menuStrip1";
             // 
@@ -229,6 +230,7 @@
             | System.Windows.Forms.Keys.N)));
             this.menuNext.Size = new System.Drawing.Size(192, 22);
             this.menuNext.Text = "&Next";
+            this.menuNext.Click += new System.EventHandler(this.menuNext_Click);
             // 
             // menuPrevious
             // 
@@ -237,16 +239,18 @@
             | System.Windows.Forms.Keys.P)));
             this.menuPrevious.Size = new System.Drawing.Size(192, 22);
             this.menuPrevious.Text = "&Previous";
+            this.menuPrevious.Click += new System.EventHandler(this.menuPrevious_Click);
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sbpnlFileName,
             this.sbpnlImageSize,
+            this.sbpnlFileIndex,
             this.sbpnlImagePercent});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 361);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 469);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(444, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(494, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "Ready";
             // 
@@ -255,7 +259,7 @@
             this.sbpnlFileName.AutoSize = false;
             this.sbpnlFileName.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.sbpnlFileName.Name = "sbpnlFileName";
-            this.sbpnlFileName.Size = new System.Drawing.Size(209, 17);
+            this.sbpnlFileName.Size = new System.Drawing.Size(199, 17);
             this.sbpnlFileName.Spring = true;
             this.sbpnlFileName.Text = "Ready";
             this.sbpnlFileName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -269,7 +273,7 @@
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.sbpnlImageSize.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken;
             this.sbpnlImageSize.Name = "sbpnlImageSize";
-            this.sbpnlImageSize.Size = new System.Drawing.Size(90, 17);
+            this.sbpnlImageSize.Size = new System.Drawing.Size(95, 17);
             this.sbpnlImageSize.Text = "600x900";
             this.sbpnlImageSize.ToolTipText = "Image Size";
             // 
@@ -281,20 +285,33 @@
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.sbpnlImagePercent.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken;
             this.sbpnlImagePercent.Name = "sbpnlImagePercent";
+            this.sbpnlImagePercent.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.sbpnlImagePercent.Size = new System.Drawing.Size(130, 17);
+            this.sbpnlImagePercent.Text = "asdasdasd";
             this.sbpnlImagePercent.ToolTipText = "Percent of image shown";
             this.sbpnlImagePercent.Paint += new System.Windows.Forms.PaintEventHandler(this.sbpnlImagePercent_Paint);
+            // 
+            // sbpnlFileIndex
+            // 
+            this.sbpnlFileIndex.AutoSize = false;
+            this.sbpnlFileIndex.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.sbpnlFileIndex.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken;
+            this.sbpnlFileIndex.Name = "sbpnlFileIndex";
+            this.sbpnlFileIndex.Size = new System.Drawing.Size(55, 17);
+            this.sbpnlFileIndex.Text = "1/2";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(444, 383);
+            this.ClientSize = new System.Drawing.Size(494, 491);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.pbxPhoto);
             this.Controls.Add(this.menuMain);
             this.MainMenuStrip = this.menuMain;
-            this.MinimumSize = new System.Drawing.Size(460, 422);
+            this.MinimumSize = new System.Drawing.Size(510, 530);
             this.Name = "MainForm";
             this.Text = "My photos";
             ((System.ComponentModel.ISupportInitialize)(this.pbxPhoto)).EndInit();
@@ -333,6 +350,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem menuNext;
         private System.Windows.Forms.ToolStripMenuItem menuPrevious;
+        private System.Windows.Forms.ToolStripStatusLabel sbpnlFileIndex;
     }
 }
 

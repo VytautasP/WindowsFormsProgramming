@@ -153,6 +153,18 @@ namespace WindowsFormsProgramming
             }
         }
 
+        private void menuNext_Click(object sender, EventArgs e)
+        {
+            if(_album.CurrentNext())
+                Invalidate();
+        }
+
+        private void menuPrevious_Click(object sender, EventArgs e)
+        {
+            if(_album.CurrentPrev())
+                Invalidate();
+        }
+
         #endregion
 
         #region statusBar Panel
@@ -189,19 +201,43 @@ namespace WindowsFormsProgramming
             sbpnlFileName.Text = "";
         }
 
+        #region MainForm
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            if (_album.Count > 0)
+            {
+                Photograph photo = _album.CurrentPhotograph;
+                pbxPhoto.Image = photo.Image;
+
+                sbpnlFileName.Text = photo.FileName;
+                sbpnlImageSize.Text = String.Format("{0:#}x{1:#}", photo.Image.Width, photo.Image.Height);
+                sbpnlFileIndex.Text = String.Format("{0:#}/{1:#}", _album.CurrentPosition + 1, _album.Count);
+            }
+            else
+            {
+                pbxPhoto.Image = null;
+                sbpnlFileName.Text = "No photos in Album";
+            }
+            base.OnPaint(e);
+        }
+
+        #endregion
+
         #endregion
 
         #region Methods
 
         private void InitContextViewMenu()
         {
-            foreach (ToolStripMenuItem menuItem in menuView.DropDownItems)
+            foreach (var menuItem in menuView.DropDownItems)
             {
-                ctxMenuView.Items.Add(ToolStripMenuItemHelper.CloneToolStripMenuItem(menuItem));
+                if (menuItem is ToolStripMenuItem)
+                    ctxMenuView.Items.Add(ToolStripMenuItemHelper.CloneToolStripMenuItem((ToolStripMenuItem) menuItem));
             }
         }
 
-        #endregion
 
+        #endregion
     }
 }
