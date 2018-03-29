@@ -40,13 +40,15 @@ namespace Extensions.PhotoAlbum
                 if (_invalidImageBitmap == null)
                 {
                     //dummy photo
-                    Bitmap bm = new Bitmap(100,100);
+                    Bitmap bm = new Bitmap(1920,1080);
                     Graphics g = Graphics.FromImage(bm);
                     g.Clear(Color.DarkGray);
 
                     Pen p = new Pen(Color.Red, 5);
-                    g.DrawLine(p, 0, 0, 100, 100);
-                    g.DrawLine(p, 100, 0, 0, 100);
+                    g.DrawLine(p, 0, 0, 1920, 1080);
+                    g.DrawLine(p, 1920, 0, 0, 1080);
+                    g.DrawString("Invalid file", new Font(family: FontFamily.GenericMonospace, emSize: 54, style:FontStyle.Bold),
+                        new SolidBrush(Color.Brown), bm.Width/2 - 200, bm.Height/2 - 40);
 
                     _invalidImageBitmap = bm;
                 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -235,6 +236,25 @@ namespace WindowsFormsProgramming
                 if (menuItem is ToolStripMenuItem)
                     ctxMenuView.Items.Add(ToolStripMenuItemHelper.CloneToolStripMenuItem((ToolStripMenuItem) menuItem));
             }
+        }
+
+        private void SetTitle()
+        {
+            Version ver = new Version(Application.ProductVersion);
+
+            var title ="";
+
+            if (_album.FileName == null)
+            {
+                title = String.Format("MyPhotos {0:#}.{1:#}", ver.Major, ver.Minor);
+            }
+            else
+            {
+                title = String.Format("{0} - MyPhotos {1:#}.{2:#}", Path.GetFileNameWithoutExtension(_album.FileName),
+                    ver.Major, ver.Minor);
+            }
+
+            Text = title;
         }
 
 

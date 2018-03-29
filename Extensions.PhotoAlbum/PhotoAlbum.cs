@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,7 +24,12 @@ namespace Extensions.PhotoAlbum
 
         private bool _disposing = false;
 
+        private static string _defaultDir = null;
+
+        private static bool _initializeDir = true;
+
         #endregion
+
         public PhotoAlbum()
         {
             //Nothing to do
@@ -74,9 +81,40 @@ namespace Extensions.PhotoAlbum
             set { List[index] = value; }
         }
 
+        public static string DefaultDir
+        {
+            get
+            {
+                if (_initializeDir)
+                {
+                    InitializeDefaultDir();
+                    _initializeDir = false;
+                }
+
+                return _defaultDir;
+            }
+
+            set
+            {
+                _defaultDir = value;
+                _initializeDir = false;
+            }
+        }
+
         #endregion
 
         #region Methods
+
+        private static void InitializeDefaultDir()
+        {
+            if (_defaultDir == null)
+            {
+                _defaultDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                _defaultDir += @"\Albums";
+                Directory.CreateDirectory(_defaultDir);
+            }
+        }
+
         public bool CurrentNext()
         {
 
