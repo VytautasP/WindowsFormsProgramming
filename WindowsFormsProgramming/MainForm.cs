@@ -36,12 +36,8 @@ namespace WindowsFormsProgramming
         public MainForm()
         {
             InitializeComponent();
-            Version ver = new Version(Application.ProductVersion);
-            Text = String.Format("My photos. Version {0:#}.{1:#}", ver.Major, ver.Minor);
-
             InitContextViewMenu();
-
-            _album = new PhotoAlbum();
+            menuNew_Click(this, EventArgs.Empty);
         }
 
         #endregion
@@ -123,6 +119,16 @@ namespace WindowsFormsProgramming
             Close();
         }
 
+        private void menuNew_Click(object sender, EventArgs e)
+        {
+            if (_album != null)
+                _album.Dispose();
+            _album = new PhotoAlbum();
+
+            SetTitle();
+
+            Invalidate();
+        }
 
         #endregion
 

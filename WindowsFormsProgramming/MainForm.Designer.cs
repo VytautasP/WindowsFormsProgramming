@@ -53,8 +53,8 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.sbpnlFileName = new System.Windows.Forms.ToolStripStatusLabel();
             this.sbpnlImageSize = new System.Windows.Forms.ToolStripStatusLabel();
-            this.sbpnlImagePercent = new System.Windows.Forms.ToolStripStatusLabel();
             this.sbpnlFileIndex = new System.Windows.Forms.ToolStripStatusLabel();
+            this.sbpnlImagePercent = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPhoto)).BeginInit();
             this.menuMain.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -106,38 +106,39 @@
             // 
             this.menuNew.Name = "menuNew";
             this.menuNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.menuNew.Size = new System.Drawing.Size(146, 22);
+            this.menuNew.Size = new System.Drawing.Size(180, 22);
             this.menuNew.Text = "&New";
+            this.menuNew.Click += new System.EventHandler(this.menuNew_Click);
             // 
             // menuOpen
             // 
             this.menuOpen.Name = "menuOpen";
             this.menuOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.menuOpen.Size = new System.Drawing.Size(146, 22);
+            this.menuOpen.Size = new System.Drawing.Size(180, 22);
             this.menuOpen.Text = "&Open";
             // 
             // menuSave
             // 
             this.menuSave.Name = "menuSave";
             this.menuSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.menuSave.Size = new System.Drawing.Size(146, 22);
+            this.menuSave.Size = new System.Drawing.Size(180, 22);
             this.menuSave.Text = "&Save";
             // 
             // menuSaveAs
             // 
             this.menuSaveAs.Name = "menuSaveAs";
-            this.menuSaveAs.Size = new System.Drawing.Size(146, 22);
+            this.menuSaveAs.Size = new System.Drawing.Size(180, 22);
             this.menuSaveAs.Text = "&Save As";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(143, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
             // 
             // menuExit
             // 
             this.menuExit.Name = "menuExit";
-            this.menuExit.Size = new System.Drawing.Size(146, 22);
+            this.menuExit.Size = new System.Drawing.Size(180, 22);
             this.menuExit.Text = "Exit";
             this.menuExit.ToolTipText = "Exits the application";
             this.menuExit.Click += new System.EventHandler(this.menuExit_Click);
@@ -157,7 +158,7 @@
             // 
             this.menuAdd.Name = "menuAdd";
             this.menuAdd.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.menuAdd.Size = new System.Drawing.Size(180, 22);
+            this.menuAdd.Size = new System.Drawing.Size(158, 22);
             this.menuAdd.Text = "&Add";
             this.menuAdd.Click += new System.EventHandler(this.menuAdd_Click);
             // 
@@ -165,7 +166,7 @@
             // 
             this.menuRemove.Name = "menuRemove";
             this.menuRemove.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.menuRemove.Size = new System.Drawing.Size(180, 22);
+            this.menuRemove.Size = new System.Drawing.Size(158, 22);
             this.menuRemove.Text = "&Remove";
             this.menuRemove.Click += new System.EventHandler(this.menuRemove_Click);
             // 
@@ -277,6 +278,17 @@
             this.sbpnlImageSize.Text = "600x900";
             this.sbpnlImageSize.ToolTipText = "Image Size";
             // 
+            // sbpnlFileIndex
+            // 
+            this.sbpnlFileIndex.AutoSize = false;
+            this.sbpnlFileIndex.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.sbpnlFileIndex.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken;
+            this.sbpnlFileIndex.Name = "sbpnlFileIndex";
+            this.sbpnlFileIndex.Size = new System.Drawing.Size(55, 17);
+            this.sbpnlFileIndex.Text = "1/2";
+            // 
             // sbpnlImagePercent
             // 
             this.sbpnlImagePercent.AutoSize = false;
@@ -290,17 +302,6 @@
             this.sbpnlImagePercent.Text = "asdasdasd";
             this.sbpnlImagePercent.ToolTipText = "Percent of image shown";
             this.sbpnlImagePercent.Paint += new System.Windows.Forms.PaintEventHandler(this.sbpnlImagePercent_Paint);
-            // 
-            // sbpnlFileIndex
-            // 
-            this.sbpnlFileIndex.AutoSize = false;
-            this.sbpnlFileIndex.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
-            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
-            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
-            this.sbpnlFileIndex.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken;
-            this.sbpnlFileIndex.Name = "sbpnlFileIndex";
-            this.sbpnlFileIndex.Size = new System.Drawing.Size(55, 17);
-            this.sbpnlFileIndex.Text = "1/2";
             // 
             // MainForm
             // 

@@ -28,6 +28,8 @@ namespace Extensions.PhotoAlbum
 
         private static bool _initializeDir = true;
 
+        private static int _currVer = 66;
+
         #endregion
 
         public PhotoAlbum()
@@ -167,6 +169,43 @@ namespace Extensions.PhotoAlbum
             List.Remove(photo);
         }
 
+        public void Dispose()
+        {
+            if (!_disposing)
+            {
+                _disposing = true;
+                foreach (Photograph photograph in this)
+                {
+                    photograph.Dispose(); ;
+                }
+
+                Clear();
+            }
+        }
+
+        public void Save(string fileName)
+        {
+
+            using (FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite))
+            {
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    sw.WriteLine(_currVer);
+
+                    foreach (Photograph photograph in this)
+                    {
+                        sw.WriteLine(photograph.FileName);
+                    }
+                }
+            }
+
+        }
+
+        public void Save()
+        {
+            Save(this.FileName);
+        }
+
         #endregion
 
         #region Overrides
@@ -187,18 +226,5 @@ namespace Extensions.PhotoAlbum
 
         #endregion
 
-        public void Dispose()
-        {
-            if (!_disposing)
-            {
-                _disposing = true;
-                foreach (Photograph photograph in this)
-                {
-                    photograph.Dispose();;
-                }
-
-                Clear();
-            }
-        }
     }
 }
