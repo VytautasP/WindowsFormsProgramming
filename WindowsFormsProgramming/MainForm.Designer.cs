@@ -123,12 +123,14 @@
             this.menuSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.menuSave.Size = new System.Drawing.Size(180, 22);
             this.menuSave.Text = "&Save";
+            this.menuSave.Click += new System.EventHandler(this.menuSave_Click);
             // 
             // menuSaveAs
             // 
             this.menuSaveAs.Name = "menuSaveAs";
             this.menuSaveAs.Size = new System.Drawing.Size(180, 22);
             this.menuSaveAs.Text = "&Save As";
+            this.menuSaveAs.Click += new System.EventHandler(this.menuSaveAs_Click);
             // 
             // toolStripMenuItem1
             // 

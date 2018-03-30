@@ -114,6 +114,40 @@ namespace WindowsFormsProgramming
 
         #region menuFile
 
+        private void menuSave_Click(object sender, EventArgs e)
+        {
+            if (_album.FileName == null)
+            {
+                menuSaveAs_Click(sender, e);
+            }
+            else
+            {
+                _album.Save();
+                _albumChanged = false;
+            }
+        }
+
+        private void menuSaveAs_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sf = new SaveFileDialog();
+            sf.Title = "Save Album as";
+            sf.DefaultExt = ".abm";
+            sf.Filter = "Album files(*.abm)|*.abm|All files(*.*)|*.*";
+            sf.InitialDirectory = PhotoAlbum.DefaultDir;
+            sf.RestoreDirectory = true;
+
+            if (sf.ShowDialog() == DialogResult.OK)
+            {
+                _album.FileName = sf.FileName;
+
+                menuSave_Click(sender, e);
+
+                SetTitle();
+            }
+
+            sf.Dispose();
+        }
+
         private void menuExit_Click(object sender, EventArgs e)
         {
             Close();
@@ -265,5 +299,6 @@ namespace WindowsFormsProgramming
 
 
         #endregion
+
     }
 }
