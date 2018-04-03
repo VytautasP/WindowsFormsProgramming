@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -181,6 +182,53 @@ namespace Extensions.PhotoAlbum
 
                 Clear();
             }
+        }
+
+        public void Open(string fileName)
+        {
+            FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+            StreamReader sr = new StreamReader(fs);
+
+            int version;
+
+            try
+            {
+                version = Int32.Parse(sr.ReadLine());
+            }
+            catch
+            {
+                version = 0;
+            }
+
+            try
+            {
+                this.Clear();
+                this.FileName = fileName;
+
+                switch (version)
+                {
+                    case 66:
+                        string name;
+                        do
+                        {
+                            name = sr.ReadLine();
+                            if (name != null)
+                            {
+                                this.Add(new Photograph(name));
+                            }
+                        } while (name != null);
+
+                        break;
+                    default:
+                        throw new IOException("Unrecognized album version");
+                }
+            }
+            finally
+            {
+                sr.Close();
+                fs.Close();
+            }
+
         }
 
         public void Save(string fileName)

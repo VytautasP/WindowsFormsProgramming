@@ -114,6 +114,31 @@ namespace WindowsFormsProgramming
 
         #region menuFile
 
+        private void menuOpen_Click(object sender, EventArgs e)
+        {
+            if (_albumChanged && _album.FileName != null)
+            {
+                menuSave_Click(sender, e);
+            }
+
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Title = "Open Album";
+            dlg.Filter = "Album files(*.abm)|*.abm";
+            dlg.InitialDirectory = PhotoAlbum.DefaultDir;
+            dlg.RestoreDirectory = true;
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                _album.Open(dlg.FileName);
+                _albumChanged = false;
+
+                Invalidate();
+            }
+
+            dlg.Dispose();
+
+        }
+
         private void menuSave_Click(object sender, EventArgs e)
         {
             if (_album.FileName == null)
