@@ -289,7 +289,15 @@ namespace WindowsFormsProgramming
             if (_album.Count > 0)
             {
                 Photograph photo = _album.CurrentPhotograph;
-                pbxPhoto.Image = photo.Image;
+                Graphics g = e.Graphics;
+
+                switch (_selectedMode)
+                {
+                    default:
+                    case DisplayMode.StretchImage:
+                        g.DrawImage(photo.Image, DisplayRectangle);
+                        break;
+                }
 
                 sbpnlFileName.Text = photo.FileName;
                 sbpnlImageSize.Text = String.Format("{0:#}x{1:#}", photo.Image.Width, photo.Image.Height);
@@ -297,7 +305,7 @@ namespace WindowsFormsProgramming
             }
             else
             {
-                pbxPhoto.Image = null;
+                e.Graphics.Clear(SystemColors.Control);
                 sbpnlFileName.Text = "No photos in Album";
             }
             base.OnPaint(e);
