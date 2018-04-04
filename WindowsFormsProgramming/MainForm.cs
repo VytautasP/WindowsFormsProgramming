@@ -24,12 +24,12 @@ namespace WindowsFormsProgramming
 
         private enum DisplayMode
         {
-            StretchImage = 0,
-            Normal = 1,
-            Zoom = 2
+            ScaleToFit = 0,
+            StretchImage = 1,
+            Normal = 2
         };
 
-        private DisplayMode _selectedMode = DisplayMode.StretchImage;
+        private DisplayMode _selectedMode = DisplayMode.ScaleToFit;
 
         #endregion
 
@@ -204,13 +204,13 @@ namespace WindowsFormsProgramming
                 switch (_selectedMode)
                 {
                     default:
+                    case DisplayMode.ScaleToFit:
+                        this.Invalidate();
+                        break;
                     case DisplayMode.StretchImage:
                         this.Invalidate();
                         break;
                     case DisplayMode.Normal:
-                        this.Invalidate();
-                        break;
-                    case DisplayMode.Zoom:
                         this.Invalidate();
                         break;
                 }
@@ -254,7 +254,7 @@ namespace WindowsFormsProgramming
             int percent = 100;
             Photograph photo = _album.CurrentPhotograph;
 
-            if (photo.Image != null)
+            if (photo?.Image != null)
             {
                 Rectangle dr = this.ClientRectangle;
                 int imgWidth = photo.Image.Width;
@@ -294,6 +294,9 @@ namespace WindowsFormsProgramming
                 switch (_selectedMode)
                 {
                     default:
+                    case DisplayMode.ScaleToFit:
+                        g.DrawImage(photo.Image, photo.ScaleToFit(DisplayRectangle));
+                        break;
                     case DisplayMode.StretchImage:
                         g.DrawImage(photo.Image, DisplayRectangle);
                         break;

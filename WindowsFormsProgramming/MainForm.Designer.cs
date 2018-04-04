@@ -54,6 +54,7 @@
             this.sbpnlImageSize = new System.Windows.Forms.ToolStripStatusLabel();
             this.sbpnlFileIndex = new System.Windows.Forms.ToolStripStatusLabel();
             this.sbpnlImagePercent = new System.Windows.Forms.ToolStripStatusLabel();
+            this.menuScale = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMain.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -176,6 +177,7 @@
             // menuImage
             // 
             this.menuImage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuScale,
             this.menuStrechToFit,
             this.menuActualSize,
             this.menuZoom});
@@ -190,21 +192,21 @@
             // menuStrechToFit
             // 
             this.menuStrechToFit.Name = "menuStrechToFit";
-            this.menuStrechToFit.Size = new System.Drawing.Size(139, 22);
+            this.menuStrechToFit.Size = new System.Drawing.Size(180, 22);
             this.menuStrechToFit.Text = "Stretch to fit";
             this.menuStrechToFit.Click += new System.EventHandler(this.menuImage_ChildClick);
             // 
             // menuActualSize
             // 
             this.menuActualSize.Name = "menuActualSize";
-            this.menuActualSize.Size = new System.Drawing.Size(139, 22);
+            this.menuActualSize.Size = new System.Drawing.Size(180, 22);
             this.menuActualSize.Text = "Actual size";
             this.menuActualSize.Click += new System.EventHandler(this.menuImage_ChildClick);
             // 
             // menuZoom
             // 
             this.menuZoom.Name = "menuZoom";
-            this.menuZoom.Size = new System.Drawing.Size(139, 22);
+            this.menuZoom.Size = new System.Drawing.Size(180, 22);
             this.menuZoom.Text = "Zoom";
             this.menuZoom.Click += new System.EventHandler(this.menuImage_ChildClick);
             // 
@@ -292,6 +294,13 @@
             this.sbpnlImagePercent.ToolTipText = "Percent of image shown";
             this.sbpnlImagePercent.Paint += new System.Windows.Forms.PaintEventHandler(this.sbpnlImagePercent_Paint);
             // 
+            // menuScale
+            // 
+            this.menuScale.Name = "menuScale";
+            this.menuScale.Size = new System.Drawing.Size(180, 22);
+            this.menuScale.Text = "Scale to fit";
+            this.menuScale.Click += new System.EventHandler(this.menuImage_ChildClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -339,6 +348,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuNext;
         private System.Windows.Forms.ToolStripMenuItem menuPrevious;
         private System.Windows.Forms.ToolStripStatusLabel sbpnlFileIndex;
+        private System.Windows.Forms.ToolStripMenuItem menuScale;
     }
 }
 

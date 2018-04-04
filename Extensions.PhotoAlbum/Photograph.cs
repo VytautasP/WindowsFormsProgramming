@@ -84,6 +84,24 @@ namespace Extensions.PhotoAlbum
 
         #region Methods
 
+        public Rectangle ScaleToFit(Rectangle targetArea)
+        {
+            Rectangle result = new Rectangle(targetArea.Location, targetArea.Size);
+
+            if (result.Height * Image.Width > result.Width * Image.Height)
+            {
+                result.Height = result.Height * Image.Height / Image.Width;
+                result.Y += (targetArea.Height - result.Height) / 2;
+            }
+            else
+            {
+                result.Width = result.Width * Image.Width / Image.Height;
+                result.X += (targetArea.Width - result.Width) / 2;
+            }
+
+            return result;
+        }
+
         #endregion
 
         #region Overrides
