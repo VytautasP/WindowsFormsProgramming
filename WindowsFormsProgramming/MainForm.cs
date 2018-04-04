@@ -21,13 +21,15 @@ namespace WindowsFormsProgramming
 
         protected PhotoAlbum _album;
         protected bool _albumChanged = false;
-        private int _selectedImageMode = 0;
-        private PictureBoxSizeMode[] _modeMenuArray = new PictureBoxSizeMode[]
+
+        private enum DisplayMode
         {
-            PictureBoxSizeMode.StretchImage,
-            PictureBoxSizeMode.Normal,
-            PictureBoxSizeMode.Zoom
-        }; 
+            StretchImage = 0,
+            Normal = 1,
+            Zoom = 2
+        };
+
+        private DisplayMode _selectedMode = DisplayMode.StretchImage;
 
         #endregion
 
@@ -197,9 +199,21 @@ namespace WindowsFormsProgramming
         {
             if (sender is ToolStripMenuItem item)
             {
-                _selectedImageMode = (item.OwnerItem as ToolStripMenuItem).DropDownItems.IndexOf(item);
-                pbxPhoto.SizeMode = _modeMenuArray[_selectedImageMode];
-                pbxPhoto.Invalidate();
+                
+                _selectedMode = (DisplayMode)(item.OwnerItem as ToolStripMenuItem).DropDownItems.IndexOf(item);
+                switch (_selectedMode)
+                {
+                    default:
+                    case DisplayMode.StretchImage:
+                        this.Invalidate();
+                        break;
+                    case DisplayMode.Normal:
+                        this.Invalidate();
+                        break;
+                    case DisplayMode.Zoom:
+                        this.Invalidate();
+                        break;
+                }
                 sbpnlImagePercent.Invalidate();
             }
         }
@@ -208,12 +222,12 @@ namespace WindowsFormsProgramming
         {
             if (sender is ToolStripMenuItem parentMenu)
             {
-                bool imageLoaded = pbxPhoto.Image != null;
+                bool imageLoaded = _album.Count > 0;
 
                 foreach (ToolStripMenuItem item in parentMenu.DropDownItems)
                 {
                     item.Enabled = imageLoaded;
-                    item.Checked = _selectedImageMode ==
+                    item.Checked = (int)_selectedMode ==
                                    (item.OwnerItem as ToolStripMenuItem).DropDownItems.IndexOf(item) && imageLoaded;
                 }
             }
@@ -238,12 +252,13 @@ namespace WindowsFormsProgramming
         private void sbpnlImagePercent_Paint(object sender, PaintEventArgs e)
         {
             int percent = 100;
+            Photograph photo = _album.CurrentPhotograph;
 
-            if (pbxPhoto.Image != null)
+            if (photo.Image != null)
             {
-                Rectangle dr = pbxPhoto.ClientRectangle;
-                int imgWidth = pbxPhoto.Image.Width;
-                int imgHeight = pbxPhoto.Image.Height;
+                Rectangle dr = this.ClientRectangle;
+                int imgWidth = photo.Image.Width;
+                int imgHeight = photo.Image.Height;
 
                 percent = 100 * Math.Min(dr.Width, imgWidth) * Math.Min(dr.Height, imgHeight) / (imgWidth * imgHeight);
 

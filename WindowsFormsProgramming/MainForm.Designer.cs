@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.pbxPhoto = new System.Windows.Forms.PictureBox();
             this.ctxMenuView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuMain = new System.Windows.Forms.MenuStrip();
             this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,22 +54,9 @@
             this.sbpnlImageSize = new System.Windows.Forms.ToolStripStatusLabel();
             this.sbpnlFileIndex = new System.Windows.Forms.ToolStripStatusLabel();
             this.sbpnlImagePercent = new System.Windows.Forms.ToolStripStatusLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxPhoto)).BeginInit();
             this.menuMain.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pbxPhoto
-            // 
-            this.pbxPhoto.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pbxPhoto.ContextMenuStrip = this.ctxMenuView;
-            this.pbxPhoto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbxPhoto.Location = new System.Drawing.Point(0, 24);
-            this.pbxPhoto.Name = "pbxPhoto";
-            this.pbxPhoto.Size = new System.Drawing.Size(494, 467);
-            this.pbxPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbxPhoto.TabIndex = 1;
-            this.pbxPhoto.TabStop = false;
             // 
             // ctxMenuView
             // 
@@ -106,7 +92,7 @@
             // 
             this.menuNew.Name = "menuNew";
             this.menuNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.menuNew.Size = new System.Drawing.Size(180, 22);
+            this.menuNew.Size = new System.Drawing.Size(146, 22);
             this.menuNew.Text = "&New";
             this.menuNew.Click += new System.EventHandler(this.menuNew_Click);
             // 
@@ -114,7 +100,7 @@
             // 
             this.menuOpen.Name = "menuOpen";
             this.menuOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.menuOpen.Size = new System.Drawing.Size(180, 22);
+            this.menuOpen.Size = new System.Drawing.Size(146, 22);
             this.menuOpen.Text = "&Open";
             this.menuOpen.Click += new System.EventHandler(this.menuOpen_Click);
             // 
@@ -122,26 +108,26 @@
             // 
             this.menuSave.Name = "menuSave";
             this.menuSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.menuSave.Size = new System.Drawing.Size(180, 22);
+            this.menuSave.Size = new System.Drawing.Size(146, 22);
             this.menuSave.Text = "&Save";
             this.menuSave.Click += new System.EventHandler(this.menuSave_Click);
             // 
             // menuSaveAs
             // 
             this.menuSaveAs.Name = "menuSaveAs";
-            this.menuSaveAs.Size = new System.Drawing.Size(180, 22);
+            this.menuSaveAs.Size = new System.Drawing.Size(146, 22);
             this.menuSaveAs.Text = "&Save As";
             this.menuSaveAs.Click += new System.EventHandler(this.menuSaveAs_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(143, 6);
             // 
             // menuExit
             // 
             this.menuExit.Name = "menuExit";
-            this.menuExit.Size = new System.Drawing.Size(180, 22);
+            this.menuExit.Size = new System.Drawing.Size(146, 22);
             this.menuExit.Text = "Exit";
             this.menuExit.ToolTipText = "Exits the application";
             this.menuExit.Click += new System.EventHandler(this.menuExit_Click);
@@ -311,14 +297,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(494, 491);
+            this.ContextMenuStrip = this.ctxMenuView;
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.pbxPhoto);
             this.Controls.Add(this.menuMain);
             this.MainMenuStrip = this.menuMain;
             this.MinimumSize = new System.Drawing.Size(510, 530);
             this.Name = "MainForm";
             this.Text = "My photos";
-            ((System.ComponentModel.ISupportInitialize)(this.pbxPhoto)).EndInit();
             this.menuMain.ResumeLayout(false);
             this.menuMain.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -329,7 +314,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.PictureBox pbxPhoto;
         private System.Windows.Forms.MenuStrip menuMain;
         private System.Windows.Forms.ToolStripMenuItem menuFile;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
