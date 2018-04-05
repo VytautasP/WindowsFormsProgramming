@@ -219,11 +219,16 @@ namespace WindowsFormsProgramming
 
                 switch (_selectedMode)
                 {
+                    default:
                     case DisplayMode.ScaleToFit:
                     case DisplayMode.StretchImage:
+                        AutoScroll = false;
                         SetStyle(ControlStyles.ResizeRedraw, true);
                         break;
-
+                    case DisplayMode.Normal:
+                        AutoScroll = true;
+                        SetStyle(ControlStyles.ResizeRedraw, false);
+                        break;
                 }
             }
         }
@@ -309,6 +314,14 @@ namespace WindowsFormsProgramming
                         break;
                     case DisplayMode.StretchImage:
                         g.DrawImage(photo.Image, DisplayRectangle);
+                        break;
+                    case DisplayMode.Normal:
+                        g.DrawImage(photo.Image, 
+                            AutoScrollPosition.X,
+                            AutoScrollPosition.Y,
+                            photo.Image.Width,
+                            photo.Image.Height);
+                        AutoScrollMinSize = photo.Image.Size;
                         break;
                 }
 
