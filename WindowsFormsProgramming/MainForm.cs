@@ -40,6 +40,7 @@ namespace WindowsFormsProgramming
             InitializeComponent();
             InitContextViewMenu();
             menuNew_Click(this, EventArgs.Empty);
+            menuImage_ChildClick(menuScale, EventArgs.Empty);
         }
 
         #endregion
@@ -215,6 +216,15 @@ namespace WindowsFormsProgramming
                         break;
                 }
                 sbpnlImagePercent.Invalidate();
+
+                switch (_selectedMode)
+                {
+                    case DisplayMode.ScaleToFit:
+                    case DisplayMode.StretchImage:
+                        SetStyle(ControlStyles.ResizeRedraw, true);
+                        break;
+
+                }
             }
         }
 
