@@ -304,7 +304,6 @@ namespace WindowsFormsProgramming
             if (_album.Count > 0)
             {
                 Photograph photo = _album.CurrentPhotograph;
-                Graphics g = e.Graphics;
 
                 sbpnlFileName.Text = photo.FileName;
                 sbpnlImageSize.Text = String.Format("{0:#}x{1:#}", photo.Image.Width, photo.Image.Height);
@@ -343,8 +342,8 @@ namespace WindowsFormsProgramming
                         break;
                     case DisplayMode.Normal:
                         g.DrawImage(photo.Image,
-                            AutoScrollPosition.X,
-                            AutoScrollPosition.Y,
+                            pnlPhoto.AutoScrollPosition.X,
+                            pnlPhoto.AutoScrollPosition.Y,
                             photo.Image.Width,
                             photo.Image.Height);
                         pnlPhoto.AutoScrollMinSize = photo.Image.Size;
