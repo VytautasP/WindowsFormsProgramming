@@ -222,11 +222,11 @@ namespace WindowsFormsProgramming
                     default:
                     case DisplayMode.ScaleToFit:
                     case DisplayMode.StretchImage:
-                        AutoScroll = false;
+                        pnlPhoto.AutoScroll = false;
                         SetStyle(ControlStyles.ResizeRedraw, true);
                         break;
                     case DisplayMode.Normal:
-                        AutoScroll = true;
+                        pnlPhoto.AutoScroll = true;
                         SetStyle(ControlStyles.ResizeRedraw, false);
                         break;
                 }
@@ -271,7 +271,7 @@ namespace WindowsFormsProgramming
 
             if (photo?.Image != null)
             {
-                Rectangle dr = this.ClientRectangle;
+                Rectangle dr = pnlPhoto.ClientRectangle;
                 int imgWidth = photo.Image.Width;
                 int imgHeight = photo.Image.Height;
 
@@ -306,35 +306,56 @@ namespace WindowsFormsProgramming
                 Photograph photo = _album.CurrentPhotograph;
                 Graphics g = e.Graphics;
 
-                switch (_selectedMode)
-                {
-                    default:
-                    case DisplayMode.ScaleToFit:
-                        g.DrawImage(photo.Image, photo.ScaleToFit(DisplayRectangle));
-                        break;
-                    case DisplayMode.StretchImage:
-                        g.DrawImage(photo.Image, DisplayRectangle);
-                        break;
-                    case DisplayMode.Normal:
-                        g.DrawImage(photo.Image, 
-                            AutoScrollPosition.X,
-                            AutoScrollPosition.Y,
-                            photo.Image.Width,
-                            photo.Image.Height);
-                        AutoScrollMinSize = photo.Image.Size;
-                        break;
-                }
-
                 sbpnlFileName.Text = photo.FileName;
                 sbpnlImageSize.Text = String.Format("{0:#}x{1:#}", photo.Image.Width, photo.Image.Height);
                 sbpnlFileIndex.Text = String.Format("{0:#}/{1:#}", _album.CurrentPosition + 1, _album.Count);
             }
             else
             {
-                e.Graphics.Clear(SystemColors.Control);
                 sbpnlFileName.Text = "No photos in Album";
             }
+
+            pnlPhoto.Invalidate();
+            statusStrip1.Invalidate();
+
             base.OnPaint(e);
+        }
+
+        #endregion
+
+        #region Photo panel
+
+        private void pnlPhoto_Paint(object sender, PaintEventArgs e)
+        {
+            if (_album.Count > 0)
+            {
+                Photograph photo = _album.CurrentPhotograph;
+                Graphics g = e.Graphics;
+
+                switch (_selectedMode)
+                {
+                    default:
+                    case DisplayMode.ScaleToFit:
+                        g.DrawImage(photo.Image, photo.ScaleToFit(pnlPhoto.DisplayRectangle));
+                        break;
+                    case DisplayMode.StretchImage:
+                        g.DrawImage(photo.Image, pnlPhoto.DisplayRectangle);
+                        break;
+                    case DisplayMode.Normal:
+                        g.DrawImage(photo.Image,
+                            AutoScrollPosition.X,
+                            AutoScrollPosition.Y,
+                            photo.Image.Width,
+                            photo.Image.Height);
+                        pnlPhoto.AutoScrollMinSize = photo.Image.Size;
+                        break;
+                }
+
+            }
+            else
+            {
+                e.Graphics.Clear(SystemColors.Control);
+            }
         }
 
         #endregion

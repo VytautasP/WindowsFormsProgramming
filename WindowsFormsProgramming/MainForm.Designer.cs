@@ -43,6 +43,7 @@
             this.menuRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.menuView = new System.Windows.Forms.ToolStripMenuItem();
             this.menuImage = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuScale = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrechToFit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuActualSize = new System.Windows.Forms.ToolStripMenuItem();
             this.menuZoom = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +55,7 @@
             this.sbpnlImageSize = new System.Windows.Forms.ToolStripStatusLabel();
             this.sbpnlFileIndex = new System.Windows.Forms.ToolStripStatusLabel();
             this.sbpnlImagePercent = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuScale = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnlPhoto = new System.Windows.Forms.Panel();
             this.menuMain.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -189,24 +190,31 @@
             this.menuImage.MouseEnter += new System.EventHandler(this.menuStrip_OnMouseEnter);
             this.menuImage.MouseLeave += new System.EventHandler(this.menuStrip_OnMouseLeave);
             // 
+            // menuScale
+            // 
+            this.menuScale.Name = "menuScale";
+            this.menuScale.Size = new System.Drawing.Size(139, 22);
+            this.menuScale.Text = "Scale to fit";
+            this.menuScale.Click += new System.EventHandler(this.menuImage_ChildClick);
+            // 
             // menuStrechToFit
             // 
             this.menuStrechToFit.Name = "menuStrechToFit";
-            this.menuStrechToFit.Size = new System.Drawing.Size(180, 22);
+            this.menuStrechToFit.Size = new System.Drawing.Size(139, 22);
             this.menuStrechToFit.Text = "Stretch to fit";
             this.menuStrechToFit.Click += new System.EventHandler(this.menuImage_ChildClick);
             // 
             // menuActualSize
             // 
             this.menuActualSize.Name = "menuActualSize";
-            this.menuActualSize.Size = new System.Drawing.Size(180, 22);
+            this.menuActualSize.Size = new System.Drawing.Size(139, 22);
             this.menuActualSize.Text = "Actual size";
             this.menuActualSize.Click += new System.EventHandler(this.menuImage_ChildClick);
             // 
             // menuZoom
             // 
             this.menuZoom.Name = "menuZoom";
-            this.menuZoom.Size = new System.Drawing.Size(180, 22);
+            this.menuZoom.Size = new System.Drawing.Size(139, 22);
             this.menuZoom.Text = "Zoom";
             this.menuZoom.Click += new System.EventHandler(this.menuImage_ChildClick);
             // 
@@ -294,12 +302,15 @@
             this.sbpnlImagePercent.ToolTipText = "Percent of image shown";
             this.sbpnlImagePercent.Paint += new System.Windows.Forms.PaintEventHandler(this.sbpnlImagePercent_Paint);
             // 
-            // menuScale
+            // pnlPhoto
             // 
-            this.menuScale.Name = "menuScale";
-            this.menuScale.Size = new System.Drawing.Size(180, 22);
-            this.menuScale.Text = "Scale to fit";
-            this.menuScale.Click += new System.EventHandler(this.menuImage_ChildClick);
+            this.pnlPhoto.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlPhoto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlPhoto.Location = new System.Drawing.Point(0, 24);
+            this.pnlPhoto.Name = "pnlPhoto";
+            this.pnlPhoto.Size = new System.Drawing.Size(494, 445);
+            this.pnlPhoto.TabIndex = 4;
+            this.pnlPhoto.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPhoto_Paint);
             // 
             // MainForm
             // 
@@ -307,6 +318,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(494, 491);
             this.ContextMenuStrip = this.ctxMenuView;
+            this.Controls.Add(this.pnlPhoto);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuMain);
             this.MainMenuStrip = this.menuMain;
@@ -349,6 +361,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuPrevious;
         private System.Windows.Forms.ToolStripStatusLabel sbpnlFileIndex;
         private System.Windows.Forms.ToolStripMenuItem menuScale;
+        private System.Windows.Forms.Panel pnlPhoto;
     }
 }
 
