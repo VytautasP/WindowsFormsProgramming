@@ -55,6 +55,11 @@ namespace WindowsFormsProgramming
 
         #region menuEdit
 
+        private void menuEdit_DropDownOpening(object sender, EventArgs e)
+        {
+            menuCaption.Enabled = _album.Count > 0;
+        }
+
         private void menuAdd_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
@@ -99,6 +104,29 @@ namespace WindowsFormsProgramming
                 }
 
                 Invalidate();
+            }
+        }
+
+        private void menuCaption_Click(object sender, EventArgs e)
+        {
+            Photograph photo = _album.CurrentPhotograph;
+
+            if (photo == null)
+                return;
+
+            using (CaptionDlg dlg = new CaptionDlg())
+            {
+                dlg.ImageLabel = photo.FileName;
+                dlg.Caption = photo.Caption;
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    photo.Caption = dlg.Caption;
+                    _albumChanged = true;
+
+                    sbpnlFileName.Text = photo.Caption;
+                    statusStrip1.Invalidate();
+                }
             }
         }
 

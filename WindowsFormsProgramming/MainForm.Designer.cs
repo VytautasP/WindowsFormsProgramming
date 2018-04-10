@@ -56,6 +56,8 @@
             this.sbpnlFileIndex = new System.Windows.Forms.ToolStripStatusLabel();
             this.sbpnlImagePercent = new System.Windows.Forms.ToolStripStatusLabel();
             this.pnlPhoto = new System.Windows.Forms.Panel();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuCaption = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMain.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -140,16 +142,19 @@
             // 
             this.menuEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuAdd,
-            this.menuRemove});
+            this.menuRemove,
+            this.toolStripMenuItem3,
+            this.menuCaption});
             this.menuEdit.Name = "menuEdit";
             this.menuEdit.Size = new System.Drawing.Size(39, 20);
             this.menuEdit.Text = "&Edit";
+            this.menuEdit.DropDownOpening += new System.EventHandler(this.menuEdit_DropDownOpening);
             // 
             // menuAdd
             // 
             this.menuAdd.Name = "menuAdd";
             this.menuAdd.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.menuAdd.Size = new System.Drawing.Size(158, 22);
+            this.menuAdd.Size = new System.Drawing.Size(180, 22);
             this.menuAdd.Text = "&Add";
             this.menuAdd.Click += new System.EventHandler(this.menuAdd_Click);
             // 
@@ -157,7 +162,7 @@
             // 
             this.menuRemove.Name = "menuRemove";
             this.menuRemove.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.menuRemove.Size = new System.Drawing.Size(158, 22);
+            this.menuRemove.Size = new System.Drawing.Size(180, 22);
             this.menuRemove.Text = "&Remove";
             this.menuRemove.Click += new System.EventHandler(this.menuRemove_Click);
             // 
@@ -312,6 +317,19 @@
             this.pnlPhoto.TabIndex = 4;
             this.pnlPhoto.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPhoto_Paint);
             // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(177, 6);
+            // 
+            // menuCaption
+            // 
+            this.menuCaption.Enabled = false;
+            this.menuCaption.Name = "menuCaption";
+            this.menuCaption.Size = new System.Drawing.Size(180, 22);
+            this.menuCaption.Text = "Caption";
+            this.menuCaption.Click += new System.EventHandler(this.menuCaption_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -362,6 +380,8 @@
         private System.Windows.Forms.ToolStripStatusLabel sbpnlFileIndex;
         private System.Windows.Forms.ToolStripMenuItem menuScale;
         private System.Windows.Forms.Panel pnlPhoto;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem menuCaption;
     }
 }
 
