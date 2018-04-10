@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace Extensions.PhotoAlbum
         private static Bitmap _invalidImageBitmap;
         private string _fileName;
         private Bitmap _bitmap;
+        private string _caption;
 
         #endregion
 
@@ -27,11 +29,18 @@ namespace Extensions.PhotoAlbum
         {
             _fileName = fileName;
             _bitmap = null;
+            _caption = Path.GetFileNameWithoutExtension(fileName);
         }
 
         #endregion
 
         #region Properties
+
+        public string Caption
+        {
+            get => _caption;
+            set => _caption = string.IsNullOrEmpty(value) ? Path.GetFileNameWithoutExtension(_fileName) : value;
+        }
 
         public static Bitmap InvalidImagePhoto
         {

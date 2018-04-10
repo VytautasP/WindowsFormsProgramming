@@ -106,10 +106,14 @@ namespace WindowsFormsProgramming
         {
             if (_album.Count > 0)
             {
-                _album.RemoveAt(_album.CurrentPosition);
-                _albumChanged = true;
+                if (MessageBox.Show("Do you want to remove current photo from album?", "Remove photo?",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    _album.RemoveAt(_album.CurrentPosition);
+                    _albumChanged = true;
 
-                Invalidate();
+                    Invalidate();
+                }
             }
         }
 
@@ -200,10 +204,7 @@ namespace WindowsFormsProgramming
 
         private void menuExit_Click(object sender, EventArgs e)
         {
-            if (CloseCurrentAlbum() == false)
-            {
-                Close();
-            }
+            Close();
         }
 
         private void menuNew_Click(object sender, EventArgs e)
@@ -328,7 +329,7 @@ namespace WindowsFormsProgramming
             {
                 Photograph photo = _album.CurrentPhotograph;
 
-                sbpnlFileName.Text = photo.FileName;
+                sbpnlFileName.Text = photo.Caption;
                 sbpnlImageSize.Text = String.Format("{0:#}x{1:#}", photo.Image.Width, photo.Image.Height);
                 sbpnlFileIndex.Text = String.Format("{0:#}/{1:#}", _album.CurrentPosition + 1, _album.Count);
             }
@@ -341,6 +342,13 @@ namespace WindowsFormsProgramming
             statusStrip1.Invalidate();
 
             base.OnPaint(e);
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = !CloseCurrentAlbum();
+
+            base.OnClosing(e);
         }
 
         #endregion

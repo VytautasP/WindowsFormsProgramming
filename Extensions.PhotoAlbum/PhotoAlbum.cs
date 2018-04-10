@@ -29,7 +29,7 @@ namespace Extensions.PhotoAlbum
 
         private static bool _initializeDir = true;
 
-        private static int _currVer = 66;
+        private static int _currVer = 83;
 
         #endregion
 
@@ -208,16 +208,22 @@ namespace Extensions.PhotoAlbum
                 switch (version)
                 {
                     case 66:
+                    case 83:
                         string name;
                         do
                         {
                             name = sr.ReadLine();
                             if (name != null)
                             {
-                                this.Add(new Photograph(name));
-                            }
-                        } while (name != null);
+                                Photograph p = new Photograph(name);
 
+                                if (version == 83)
+                                    p.Caption = sr.ReadLine();
+
+                                this.Add(p);
+                            }
+
+                        } while (name != null);
                         break;
                     default:
                         throw new IOException("Unrecognized album version");
@@ -243,6 +249,7 @@ namespace Extensions.PhotoAlbum
                     foreach (Photograph photograph in this)
                     {
                         sw.WriteLine(photograph.FileName);
+                        sw.WriteLine(photograph.Caption);
                     }
                 }
             }
