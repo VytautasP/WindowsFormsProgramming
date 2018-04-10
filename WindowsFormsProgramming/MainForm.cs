@@ -119,9 +119,9 @@ namespace WindowsFormsProgramming
 
         private void menuOpen_Click(object sender, EventArgs e)
         {
-            if (_albumChanged && _album.FileName != null)
+            if (CloseCurrentAlbum() == false)
             {
-                menuSave_Click(sender, e);
+                return;
             }
 
             OpenFileDialog dlg = new OpenFileDialog();
@@ -132,10 +132,18 @@ namespace WindowsFormsProgramming
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                _album.Open(dlg.FileName);
-                _albumChanged = false;
+                try
+                {
+                    _album.Open(dlg.FileName);
+                    _albumChanged = false;
 
-                Invalidate();
+                    Invalidate();
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show("Unable to open file " + dlg.FileName + "\n" + err.Message, "Open file Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
             dlg.Dispose();
@@ -150,8 +158,22 @@ namespace WindowsFormsProgramming
             }
             else
             {
-                _album.Save();
-                _albumChanged = false;
+                try
+                {
+                    _album.Save();
+                    _albumChanged = false;
+                }
+                catch (Exception err)
+                {
+                    var msg = String.Format(
+                        "Unable to save file {0} - {1}\nWould you like to save the album in alternate file", _album.FileName, err.Message);
+
+                    var result = MessageBox.Show(msg, "Save Album Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error,
+                        MessageBoxDefaultButton.Button2);
+
+                    if(result == DialogResult.Yes)
+                        menuSaveAs_Click(sender, e);
+                }
             }
         }
 
@@ -178,18 +200,19 @@ namespace WindowsFormsProgramming
 
         private void menuExit_Click(object sender, EventArgs e)
         {
-            Close();
+            if (CloseCurrentAlbum() == false)
+            {
+                Close();
+            }
         }
 
         private void menuNew_Click(object sender, EventArgs e)
         {
-            if (_album != null)
-                _album.Dispose();
-            _album = new PhotoAlbum();
 
-            SetTitle();
-
-            Invalidate();
+            if (CloseCurrentAlbum() == true)
+            {
+                Invalidate();
+            }
         }
 
         #endregion
@@ -389,6 +412,34 @@ namespace WindowsFormsProgramming
             }
 
             Text = title;
+        }
+
+        protected bool CloseCurrentAlbum()
+        {
+            if (_albumChanged)
+            {
+                var msg = _album.FileName == null
+                    ? "Do you want to save the current album?"
+                    : String.Format("Do you want to save changes to {0}", _album.FileName);
+
+                var result = MessageBox.Show(this, msg, "Save album?", MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question);
+
+                if(result == DialogResult.Yes)
+                    menuSave_Click(this, EventArgs.Empty);
+                else if (result == DialogResult.Cancel)
+                    return false;
+                
+            }
+
+            if (_album != null)
+                _album.Dispose();
+
+            _album = new PhotoAlbum();
+            SetTitle();
+            _albumChanged = false;
+
+            return true;
         }
 
 
