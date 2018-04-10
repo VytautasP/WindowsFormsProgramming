@@ -58,6 +58,8 @@
             this.pnlPhoto = new System.Windows.Forms.Panel();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.menuCaption = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuPixel = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMain.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -172,11 +174,14 @@
             this.menuImage,
             this.toolStripMenuItem2,
             this.menuNext,
-            this.menuPrevious});
+            this.menuPrevious,
+            this.toolStripMenuItem4,
+            this.menuPixel});
             this.menuView.Name = "menuView";
             this.menuView.Size = new System.Drawing.Size(44, 20);
             this.menuView.Text = "&View";
             this.menuView.ToolTipText = "Application view properties";
+            this.menuView.DropDownOpening += new System.EventHandler(this.menuView_DropDownOpening);
             this.menuView.MouseEnter += new System.EventHandler(this.menuStrip_OnMouseEnter);
             this.menuView.MouseLeave += new System.EventHandler(this.menuStrip_OnMouseLeave);
             // 
@@ -198,28 +203,28 @@
             // menuScale
             // 
             this.menuScale.Name = "menuScale";
-            this.menuScale.Size = new System.Drawing.Size(139, 22);
+            this.menuScale.Size = new System.Drawing.Size(180, 22);
             this.menuScale.Text = "Scale to fit";
             this.menuScale.Click += new System.EventHandler(this.menuImage_ChildClick);
             // 
             // menuStrechToFit
             // 
             this.menuStrechToFit.Name = "menuStrechToFit";
-            this.menuStrechToFit.Size = new System.Drawing.Size(139, 22);
+            this.menuStrechToFit.Size = new System.Drawing.Size(180, 22);
             this.menuStrechToFit.Text = "Stretch to fit";
             this.menuStrechToFit.Click += new System.EventHandler(this.menuImage_ChildClick);
             // 
             // menuActualSize
             // 
             this.menuActualSize.Name = "menuActualSize";
-            this.menuActualSize.Size = new System.Drawing.Size(139, 22);
+            this.menuActualSize.Size = new System.Drawing.Size(180, 22);
             this.menuActualSize.Text = "Actual size";
             this.menuActualSize.Click += new System.EventHandler(this.menuImage_ChildClick);
             // 
             // menuZoom
             // 
             this.menuZoom.Name = "menuZoom";
-            this.menuZoom.Size = new System.Drawing.Size(139, 22);
+            this.menuZoom.Size = new System.Drawing.Size(180, 22);
             this.menuZoom.Text = "Zoom";
             this.menuZoom.Click += new System.EventHandler(this.menuImage_ChildClick);
             // 
@@ -310,12 +315,14 @@
             // pnlPhoto
             // 
             this.pnlPhoto.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlPhoto.Cursor = System.Windows.Forms.Cursors.Cross;
             this.pnlPhoto.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPhoto.Location = new System.Drawing.Point(0, 24);
             this.pnlPhoto.Name = "pnlPhoto";
             this.pnlPhoto.Size = new System.Drawing.Size(494, 445);
             this.pnlPhoto.TabIndex = 4;
             this.pnlPhoto.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPhoto_Paint);
+            this.pnlPhoto.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlPhoto_MouseMove);
             // 
             // toolStripMenuItem3
             // 
@@ -329,6 +336,18 @@
             this.menuCaption.Size = new System.Drawing.Size(180, 22);
             this.menuCaption.Text = "Caption";
             this.menuCaption.Click += new System.EventHandler(this.menuCaption_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(189, 6);
+            // 
+            // menuPixel
+            // 
+            this.menuPixel.Name = "menuPixel";
+            this.menuPixel.Size = new System.Drawing.Size(192, 22);
+            this.menuPixel.Text = "Pixel data";
+            this.menuPixel.Click += new System.EventHandler(this.menuPixel_Click);
             // 
             // MainForm
             // 
@@ -382,6 +401,8 @@
         private System.Windows.Forms.Panel pnlPhoto;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem menuCaption;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem menuPixel;
     }
 }
 

@@ -22,6 +22,9 @@ namespace WindowsFormsProgramming
         protected PhotoAlbum _album;
         protected bool _albumChanged = false;
 
+        private PixelDlg _dlgPixel = null;
+        private int _pixelDlgIndex;
+
         private enum DisplayMode
         {
             ScaleToFit = 0,
@@ -248,6 +251,14 @@ namespace WindowsFormsProgramming
 
         #region menuView
 
+        private void menuView_DropDownOpening(object sender, EventArgs e)
+        {
+            if (_dlgPixel != null && _dlgPixel.Visible)
+                menuPixel.Text = "Hide Pixel Data";
+            else
+                menuPixel.Text = "Pixel Data";
+        }
+
         protected void menuImage_ChildClick(object sender, EventArgs e)
         {
             if (sender is ToolStripMenuItem item)
@@ -310,6 +321,34 @@ namespace WindowsFormsProgramming
         {
             if(_album.CurrentPrev())
                 Invalidate();
+        }
+
+        private void menuPixel_Click(object sender, EventArgs e)
+        {
+            if (_dlgPixel != null && _dlgPixel.Visible)
+            {
+                _dlgPixel.Hide();
+                return;
+            }
+
+            if (_dlgPixel == null || _dlgPixel.IsDisposed)
+            {
+                _dlgPixel = new PixelDlg();
+                _dlgPixel.Owner = this;
+            }
+
+            _pixelDlgIndex = _album.CurrentPosition;
+            Point p = pnlPhoto.PointToClient(Form.MousePosition);
+
+            UpdatePixelData(p.X, p.Y);
+
+            _dlgPixel.StartPosition = FormStartPosition.Manual;
+            Point location = this.Location;
+            location.X -= _dlgPixel.Width;
+            location.Y += _dlgPixel.Height / 2;
+
+            _dlgPixel.Location = location;
+            _dlgPixel.Show();
         }
 
         #endregion
@@ -385,6 +424,13 @@ namespace WindowsFormsProgramming
 
         private void pnlPhoto_Paint(object sender, PaintEventArgs e)
         {
+            if (_dlgPixel != null && _pixelDlgIndex != _album.CurrentPosition)
+            {
+                _pixelDlgIndex = _album.CurrentPosition;
+                Point p = pnlPhoto.PointToClient(Form.MousePosition);
+                UpdatePixelData(p.X, p.Y);
+            }
+
             if (_album.Count > 0)
             {
                 Photograph photo = _album.CurrentPhotograph;
@@ -414,6 +460,11 @@ namespace WindowsFormsProgramming
             {
                 e.Graphics.Clear(SystemColors.Control);
             }
+        }
+
+        private void pnlPhoto_MouseMove(object sender, MouseEventArgs e)
+        {
+            UpdatePixelData(e.X, e.Y);
         }
 
         #endregion
@@ -478,6 +529,62 @@ namespace WindowsFormsProgramming
             return true;
         }
 
+        protected void UpdatePixelData(int xPos, int yPos)
+        {
+            if (_dlgPixel == null || !_dlgPixel.Visible)
+                return;
+
+            Photograph photo = _album.CurrentPhotograph;
+
+            Rectangle r = pnlPhoto.ClientRectangle;
+            if (photo == null || !r.Contains(xPos, yPos))
+            {
+                _dlgPixel.Text = photo == null ? " " : photo.Caption;
+                _dlgPixel.XVal = 0;
+                _dlgPixel.YVal = 0;
+                _dlgPixel.RedVal = 0;
+                _dlgPixel.BlueVal = 0;
+                _dlgPixel.GreenVal = 0;
+                _dlgPixel.Update();
+
+                return;
+            }
+
+            int x = 0, y = 0;
+            Bitmap bmp = photo.Image;
+
+            switch (_selectedMode)
+            {
+                case DisplayMode.Normal:
+                    x = xPos;
+                    y = yPos;
+                    break;
+                case DisplayMode.StretchImage:
+                    x = xPos * bmp.Width / r.Width;
+                    y = yPos * bmp.Height / r.Height;
+                    break;
+                case DisplayMode.ScaleToFit:
+                    Rectangle r2 = photo.ScaleToFit(r);
+
+                    if (!r2.Contains(xPos, yPos))
+                        return;
+
+                    x = (xPos - r2.Left) * bmp.Width / r2.Width;
+                    y = (yPos - r2.Top) * bmp.Height / r2.Height;
+
+                    break;
+            }
+
+            Color c = bmp.GetPixel(x, y);
+
+            _dlgPixel.XVal = x;
+            _dlgPixel.YVal = y;
+            _dlgPixel.RedVal = c.R;
+            _dlgPixel.BlueVal = c.B;
+            _dlgPixel.GreenVal = c.G;
+            _dlgPixel.Update();
+
+        }
 
         #endregion
 
