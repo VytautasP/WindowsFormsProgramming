@@ -29,7 +29,7 @@ namespace Extensions.PhotoAlbum
 
         private static bool _initializeDir = true;
 
-        private static int _currVer = 83;
+        private static int _currVer = 92;
 
         #endregion
 
@@ -205,28 +205,28 @@ namespace Extensions.PhotoAlbum
                 this.Clear();
                 this.FileName = fileName;
 
+                Photograph.ReadDelegate readPhoto;
+
                 switch (version)
                 {
                     case 66:
+                        readPhoto = new Photograph.ReadDelegate(Photograph.ReadVersion66);
+                        break;
                     case 83:
-                        string name;
-                        do
-                        {
-                            name = sr.ReadLine();
-                            if (name != null)
-                            {
-                                Photograph p = new Photograph(name);
-
-                                if (version == 83)
-                                    p.Caption = sr.ReadLine();
-
-                                this.Add(p);
-                            }
-
-                        } while (name != null);
+                        readPhoto = new Photograph.ReadDelegate(Photograph.ReadVersion83);
+                        break;
+                    case 92:
+                        readPhoto = new Photograph.ReadDelegate(Photograph.ReadVersion92);
                         break;
                     default:
                         throw new IOException("Unrecognized album version");
+                }
+
+                Photograph p = readPhoto(sr);
+                while (p != null)
+                {
+                    this.Add(p);
+                    p = readPhoto(sr);
                 }
             }
             finally
@@ -248,9 +248,10 @@ namespace Extensions.PhotoAlbum
 
                     foreach (Photograph photograph in this)
                     {
-                        sw.WriteLine(photograph.FileName);
-                        sw.WriteLine(photograph.Caption);
+                        photograph.Write(sw);
                     }
+
+                    this._fileName = fileName;
                 }
             }
 

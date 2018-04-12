@@ -24,6 +24,8 @@ namespace Extensions.PhotoAlbum
         private string _photographer;
         private string _notes;
 
+        public delegate Photograph ReadDelegate(StreamReader sr);
+
         #endregion
 
         #region Constructors
@@ -161,7 +163,7 @@ namespace Extensions.PhotoAlbum
         {
             string name = sr.ReadLine();
 
-            if (name == null)
+            if (string.IsNullOrWhiteSpace(name))
                 return null;
 
             Photograph p = new Photograph(name);
@@ -185,8 +187,10 @@ namespace Extensions.PhotoAlbum
             data = sr.ReadLine();
             int len = Convert.ToInt32(data);
             char[] noteArray = new char[len];
-            p.Notes = sr.Read(noteArray, 0, len).ToString();
+            sr.Read(noteArray, 0, len);
+            p.Notes = new string(noteArray);
 
+            sr.ReadLine();
             sr.ReadLine();
 
             return p;

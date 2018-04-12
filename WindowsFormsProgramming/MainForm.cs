@@ -60,7 +60,7 @@ namespace WindowsFormsProgramming
 
         private void menuEdit_DropDownOpening(object sender, EventArgs e)
         {
-            menuCaption.Enabled = _album.Count > 0;
+            menuPhotoProp.Enabled = _album.Count > 0;
         }
 
         private void menuAdd_Click(object sender, EventArgs e)
@@ -110,27 +110,22 @@ namespace WindowsFormsProgramming
             }
         }
 
-        private void menuCaption_Click(object sender, EventArgs e)
+        private void menuPhotoProp_Click(object sender, EventArgs e)
         {
-            Photograph photo = _album.CurrentPhotograph;
-
-            if (photo == null)
+            if (_album.CurrentPhotograph == null)
                 return;
 
-            using (CaptionDlg dlg = new CaptionDlg())
+            using (PhotoEditDlg dlg = new PhotoEditDlg(_album))
             {
-                dlg.ImageLabel = photo.FileName;
-                dlg.Caption = photo.Caption;
-
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    photo.Caption = dlg.Caption;
                     _albumChanged = true;
 
-                    sbpnlFileName.Text = photo.Caption;
+                    sbpnlFileName.Text = _album.CurrentPhotograph.Caption;
                     statusStrip1.Invalidate();
                 }
             }
+
         }
 
         private void menuRemove_Click(object sender, EventArgs e)
