@@ -42,11 +42,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlbumEditDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlbumEditDlg.Designer.cs">
+      <DependentUpon>AlbumEditDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="BaseEditDlg.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="BaseEditDlg.Designer.cs">
       <DependentUpon>BaseEditDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PasswordDlg.Designer.cs">
+      <DependentUpon>PasswordDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="PhotoAlbum.cs" />
     <Compile Include="PhotoEditDlg.cs">
@@ -59,8 +71,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AlbumEditDlg.resx">
+      <DependentUpon>AlbumEditDlg.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BaseEditDlg.resx">
       <DependentUpon>BaseEditDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PasswordDlg.resx">
+      <DependentUpon>PasswordDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhotoEditDlg.resx">
       <DependentUpon>PhotoEditDlg.cs</DependentUpon>

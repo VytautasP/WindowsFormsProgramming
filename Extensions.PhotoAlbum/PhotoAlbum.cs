@@ -7,6 +7,7 @@ using System.Net;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Extensions.PhotoAlbum
 {
@@ -29,8 +30,18 @@ namespace Extensions.PhotoAlbum
 
         private static bool _initializeDir = true;
 
-        private static int _currVer = 92;
+        private static int _currVer = 93;
 
+        private string _title;
+
+        private string _password;
+
+        public enum DisplayValEnum
+        {
+            FileName, Caption, Date
+        }
+
+        private DisplayValEnum _displayOption = DisplayValEnum.Caption;
         #endregion
 
         public PhotoAlbum()
@@ -70,6 +81,24 @@ namespace Extensions.PhotoAlbum
             }
         }
 
+        public string Title
+        {
+            get => _title;
+            set => _title = value;
+        }
+
+        public string Password
+        {
+            get => _password;
+            set => _password = value;
+        }
+
+        public DisplayValEnum DisplayOption
+        {
+            get => _displayOption;
+            set => _displayOption = value;
+        }
+
         public virtual bool IsSynchronized => false;
 
         public virtual object SyncRoot => List.SyncRoot;
@@ -104,6 +133,7 @@ namespace Extensions.PhotoAlbum
             }
         }
 
+        public string CurrentDisplayText => GetDisplayText(CurrentPhotograph);
         #endregion
 
         #region Methods
@@ -204,6 +234,16 @@ namespace Extensions.PhotoAlbum
             {
                 this.Clear();
                 this.FileName = fileName;
+                ReadAlbumData(sr, version);
+
+                if (!String.IsNullOrWhiteSpace(_password))
+                {
+                    using (PasswordDlg dlg = new PasswordDlg())
+                    {
+                        if(dlg.ShowDialog() == DialogResult.OK && dlg.Password != _password)
+                            throw new ApplicationException("Invalid password provided!");
+                    }
+                }
 
                 Photograph.ReadDelegate readPhoto;
 
@@ -245,6 +285,9 @@ namespace Extensions.PhotoAlbum
                 using (StreamWriter sw = new StreamWriter(fs))
                 {
                     sw.WriteLine(_currVer);
+                    sw.WriteLine(_title);
+                    sw.WriteLine(_password);
+                    sw.WriteLine(Convert.ToString((int)_displayOption));
 
                     foreach (Photograph photograph in this)
                     {
@@ -262,6 +305,37 @@ namespace Extensions.PhotoAlbum
             Save(this.FileName);
         }
 
+        public string GetDisplayText(Photograph photo)
+        {
+            switch (this._displayOption)
+            {
+                case DisplayValEnum.Caption:
+                default:
+                    return photo.Caption;
+                case DisplayValEnum.Date:
+                    return photo.DateTaken.ToString("g");
+                case DisplayValEnum.FileName:
+                    return Path.GetFileNameWithoutExtension(photo.FileName);
+            }
+        }
+
+        protected void ReadAlbumData(StreamReader sr, int version)
+        {
+            _title = null;
+            _password = null;
+            _displayOption = DisplayValEnum.Caption;
+
+            if (version >= 93)
+            {
+                _title = sr.ReadLine();
+                _password = sr.ReadLine();
+                _displayOption = (DisplayValEnum) Convert.ToInt32(sr.ReadLine());
+            }
+
+            if (String.IsNullOrWhiteSpace(_title))
+                _title = Path.GetFileNameWithoutExtension(_fileName);
+        }
+
         #endregion
 
         #region Overrides
@@ -270,6 +344,9 @@ namespace Extensions.PhotoAlbum
         {
             _currentPos = 0;
             _fileName = null;
+            _title = null;
+            _password = null;
+            _displayOption = DisplayValEnum.Caption;
             Dispose();
             base.OnClear();
         }
