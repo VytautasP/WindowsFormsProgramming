@@ -20,6 +20,9 @@ namespace Extensions.PhotoAlbum
         private string _fileName;
         private Bitmap _bitmap;
         private string _caption;
+        private DateTime _dateTaken;
+        private string _photographer;
+        private string _notes;
 
         #endregion
 
@@ -30,11 +33,32 @@ namespace Extensions.PhotoAlbum
             _fileName = fileName;
             _bitmap = null;
             _caption = Path.GetFileNameWithoutExtension(fileName);
+            _dateTaken = DateTime.Now;
+            _photographer = "uknown";
+            _notes = "no notes provided";
         }
 
         #endregion
 
         #region Properties
+
+        public DateTime DateTaken
+        {
+            get => _dateTaken;
+            set => _dateTaken = value;
+        }
+
+        public string Photographer
+        {
+            get => _photographer;
+            set => _photographer = value;
+        }
+
+        public string Notes
+        {
+            get => _notes;
+            set => _notes = value;
+        }
 
         public string Caption
         {
@@ -109,6 +133,64 @@ namespace Extensions.PhotoAlbum
             }
 
             return result;
+        }
+
+        public void Write(StreamWriter sw)
+        {
+            sw.WriteLine(this.FileName);
+            sw.WriteLine(this.Caption);
+
+            sw.WriteLine(this.DateTaken.Ticks);
+            sw.WriteLine(this.Photographer);
+
+            sw.WriteLine(this.Notes.Length);
+            sw.WriteLine(this.Notes.ToCharArray());
+            sw.WriteLine();
+        }
+
+        public static Photograph ReadVersion66(StreamReader sr)
+        {
+            string name = sr.ReadLine();
+            if (name != null)
+                return new Photograph(name);
+            else
+                return null;
+        }
+
+        public static Photograph ReadVersion83(StreamReader sr)
+        {
+            string name = sr.ReadLine();
+
+            if (name == null)
+                return null;
+
+            Photograph p = new Photograph(name);
+            p.Caption = sr.ReadLine();
+            return p;
+        }
+
+        public static Photograph ReadVersion92(StreamReader sr)
+        {
+            Photograph p = ReadVersion83(sr);
+
+            if (p == null)
+                return null;
+
+            string data = sr.ReadLine();
+            long ticks = Convert.ToInt64(data);
+            p.DateTaken = new DateTime(ticks);
+
+            p.Photographer = sr.ReadLine();
+
+            data = sr.ReadLine();
+            int len = Convert.ToInt32(data);
+            char[] noteArray = new char[len];
+            p.Notes = sr.Read(noteArray, 0, len).ToString();
+
+            sr.ReadLine();
+
+            return p;
+
         }
 
         #endregion
