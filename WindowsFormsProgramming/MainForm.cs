@@ -128,6 +128,18 @@ namespace WindowsFormsProgramming
 
         }
 
+        private void menuAlbumProp_Click(object sender, EventArgs e)
+        {
+            using (AlbumEditDlg dlg = new AlbumEditDlg(_album))
+            {
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    _albumChanged = true;
+                    this.Invalidate();
+                }
+            }
+        }
+
         private void menuRemove_Click(object sender, EventArgs e)
         {
             if (_album.Count > 0)
@@ -391,7 +403,7 @@ namespace WindowsFormsProgramming
             {
                 Photograph photo = _album.CurrentPhotograph;
 
-                sbpnlFileName.Text = photo.Caption;
+                sbpnlFileName.Text = _album.CurrentDisplayText;
                 sbpnlImageSize.Text = String.Format("{0:#}x{1:#}", photo.Image.Width, photo.Image.Height);
                 sbpnlFileIndex.Text = String.Format("{0:#}/{1:#}", _album.CurrentPosition + 1, _album.Count);
             }
@@ -582,6 +594,7 @@ namespace WindowsFormsProgramming
         }
 
         #endregion
+
 
     }
 }

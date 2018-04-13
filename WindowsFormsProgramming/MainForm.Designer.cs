@@ -60,6 +60,7 @@
             this.sbpnlFileIndex = new System.Windows.Forms.ToolStripStatusLabel();
             this.sbpnlImagePercent = new System.Windows.Forms.ToolStripStatusLabel();
             this.pnlPhoto = new System.Windows.Forms.Panel();
+            this.menuAlbumProp = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMain.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -146,7 +147,8 @@
             this.menuAdd,
             this.menuRemove,
             this.toolStripMenuItem3,
-            this.menuPhotoProp});
+            this.menuPhotoProp,
+            this.menuAlbumProp});
             this.menuEdit.Name = "menuEdit";
             this.menuEdit.Size = new System.Drawing.Size(39, 20);
             this.menuEdit.Text = "&Edit";
@@ -349,6 +351,13 @@
             this.pnlPhoto.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPhoto_Paint);
             this.pnlPhoto.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlPhoto_MouseMove);
             // 
+            // menuAlbumProp
+            // 
+            this.menuAlbumProp.Name = "menuAlbumProp";
+            this.menuAlbumProp.Size = new System.Drawing.Size(180, 22);
+            this.menuAlbumProp.Text = "Album properties";
+            this.menuAlbumProp.Click += new System.EventHandler(this.menuAlbumProp_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -403,6 +412,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuPhotoProp;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem menuPixel;
+        private System.Windows.Forms.ToolStripMenuItem menuAlbumProp;
     }
 }
 

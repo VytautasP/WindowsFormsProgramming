@@ -26,10 +26,12 @@ namespace Extensions.PhotoAlbum
 
             rbtnFileName.Tag = (int) PhotoAlbum.DisplayValEnum.FileName;
             rbtnCaption.Tag = (int) PhotoAlbum.DisplayValEnum.Caption;
-            rbtnCaption.Tag = (int) PhotoAlbum.DisplayValEnum.Date;
+            rbtnDate.Tag = (int) PhotoAlbum.DisplayValEnum.Date;
             _album = album;
             ResetSettings();
         }
+
+        #region Overrides
 
         protected override void ResetSettings()
         {
@@ -43,8 +45,8 @@ namespace Extensions.PhotoAlbum
             {
                 default:
                 case PhotoAlbum.DisplayValEnum.Caption:
-                        rbtnCaption.Checked = true;
-                        break;
+                    rbtnCaption.Checked = true;
+                    break;
                 case PhotoAlbum.DisplayValEnum.FileName:
                     rbtnFileName.Checked = true;
                     break;
@@ -76,6 +78,11 @@ namespace Extensions.PhotoAlbum
             return valid;
         }
 
+        #endregion
+        
+
+        #region Event handlers
+        
         private void DisplayOption_click(object sender, EventArgs e)
         {
             if(sender is RadioButton rb)
@@ -104,6 +111,8 @@ namespace Extensions.PhotoAlbum
                 e.Cancel = true;
             }
         }
+
+        #endregion
 
         private bool ValidPasswords()
         {

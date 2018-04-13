@@ -256,6 +256,7 @@ namespace Extensions.PhotoAlbum
                         readPhoto = new Photograph.ReadDelegate(Photograph.ReadVersion83);
                         break;
                     case 92:
+                    case 93:
                         readPhoto = new Photograph.ReadDelegate(Photograph.ReadVersion92);
                         break;
                     default:

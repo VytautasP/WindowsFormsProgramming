@@ -33,9 +33,9 @@
             this.txtAlbumFile = new System.Windows.Forms.TextBox();
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbtnFileName = new System.Windows.Forms.RadioButton();
-            this.rbtnCaption = new System.Windows.Forms.RadioButton();
             this.rbtnDate = new System.Windows.Forms.RadioButton();
+            this.rbtnCaption = new System.Windows.Forms.RadioButton();
+            this.rbtnFileName = new System.Windows.Forms.RadioButton();
             this.cbtnPassword = new System.Windows.Forms.CheckBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtConfirmPassword = new System.Windows.Forms.TextBox();
@@ -97,17 +97,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Photo Display Text";
             // 
-            // rbtnFileName
+            // rbtnDate
             // 
-            this.rbtnFileName.AutoSize = true;
-            this.rbtnFileName.Location = new System.Drawing.Point(12, 20);
-            this.rbtnFileName.Name = "rbtnFileName";
-            this.rbtnFileName.Size = new System.Drawing.Size(72, 17);
-            this.rbtnFileName.TabIndex = 0;
-            this.rbtnFileName.TabStop = true;
-            this.rbtnFileName.Text = "File Name";
-            this.rbtnFileName.UseVisualStyleBackColor = true;
-            this.rbtnFileName.Click += new System.EventHandler(this.DisplayOption_click);
+            this.rbtnDate.AutoSize = true;
+            this.rbtnDate.Location = new System.Drawing.Point(194, 20);
+            this.rbtnDate.Name = "rbtnDate";
+            this.rbtnDate.Size = new System.Drawing.Size(48, 17);
+            this.rbtnDate.TabIndex = 2;
+            this.rbtnDate.TabStop = true;
+            this.rbtnDate.Text = "Date";
+            this.rbtnDate.UseVisualStyleBackColor = true;
+            this.rbtnDate.Click += new System.EventHandler(this.DisplayOption_click);
             // 
             // rbtnCaption
             // 
@@ -121,17 +121,17 @@
             this.rbtnCaption.UseVisualStyleBackColor = true;
             this.rbtnCaption.Click += new System.EventHandler(this.DisplayOption_click);
             // 
-            // rbtnDate
+            // rbtnFileName
             // 
-            this.rbtnDate.AutoSize = true;
-            this.rbtnDate.Location = new System.Drawing.Point(194, 20);
-            this.rbtnDate.Name = "rbtnDate";
-            this.rbtnDate.Size = new System.Drawing.Size(48, 17);
-            this.rbtnDate.TabIndex = 2;
-            this.rbtnDate.TabStop = true;
-            this.rbtnDate.Text = "Date";
-            this.rbtnDate.UseVisualStyleBackColor = true;
-            this.rbtnDate.Click += new System.EventHandler(this.DisplayOption_click);
+            this.rbtnFileName.AutoSize = true;
+            this.rbtnFileName.Location = new System.Drawing.Point(12, 20);
+            this.rbtnFileName.Name = "rbtnFileName";
+            this.rbtnFileName.Size = new System.Drawing.Size(72, 17);
+            this.rbtnFileName.TabIndex = 0;
+            this.rbtnFileName.TabStop = true;
+            this.rbtnFileName.Text = "File Name";
+            this.rbtnFileName.UseVisualStyleBackColor = true;
+            this.rbtnFileName.Click += new System.EventHandler(this.DisplayOption_click);
             // 
             // cbtnPassword
             // 
@@ -176,7 +176,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(287, 286);
+            this.ClientSize = new System.Drawing.Size(283, 286);
             this.Controls.Add(this.lblConfirmPwd);
             this.Controls.Add(this.txtConfirmPassword);
             this.Controls.Add(this.txtPassword);
