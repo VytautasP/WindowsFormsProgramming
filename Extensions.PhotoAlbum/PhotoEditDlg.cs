@@ -41,13 +41,30 @@ namespace Extensions.PhotoAlbum
         {
             Photograph photo = _album.CurrentPhotograph;
 
+            if (cmbPhotographer.Items.Count == 0)
+            {
+                cmbPhotographer.BeginUpdate();
+                cmbPhotographer.Items.Clear();
+                cmbPhotographer.Items.Add("Unknown");
+
+                foreach (Photograph ph in _album)
+                {
+                    if (ph.Photographer != null && !cmbPhotographer.Items.Contains(ph.Photographer))
+                    {
+                        cmbPhotographer.Items.Add(ph.Photographer);
+                    }
+                }
+
+                cmbPhotographer.EndUpdate();
+            }
+
             if (photo != null)
             {
                 txtPhotoFile.Text = photo.FileName;
                 txtCaption.Text = photo.Caption;
                 txtDateTaken.Text = photo.DateTaken.ToString();
-                txtPhotographer.Text = photo.Photographer;
                 txtNote.Text = photo.Notes;
+                cmbPhotographer.SelectedItem = photo.Photographer;
             }
         }
 
@@ -58,7 +75,7 @@ namespace Extensions.PhotoAlbum
             if (photo != null)
             {
                 photo.Caption = txtCaption.Text;
-                photo.Photographer = txtPhotographer.Text;
+                photo.Photographer = cmbPhotographer.Text;
                 photo.Notes = txtNote.Text;
             }
 
@@ -79,6 +96,38 @@ namespace Extensions.PhotoAlbum
         private void txtCaption_TextChanged(object sender, EventArgs e)
         {
             this.Text = String.Format("{0} - Photo Properties", txtCaption.Text);
+        }
+
+        private void cmbPhotographer_Validated(object sender, EventArgs e)
+        {
+            var photographer = cmbPhotographer.Text;
+
+            if (!cmbPhotographer.Items.Contains(photographer))
+            {
+                _album.CurrentPhotograph.Photographer = photographer;
+                cmbPhotographer.Items.Add(photographer);
+            }
+
+            cmbPhotographer.SelectedItem = photographer;
+
+        }
+
+        private void cmbPhotographer_TextChanged(object sender, EventArgs e)
+        {
+            var txt = cmbPhotographer.Text;
+            var index = cmbPhotographer.FindString(txt);
+
+            if (index >= 0)
+            {
+                var newTxt = cmbPhotographer.Items[index].ToString();
+                cmbPhotographer.Text = newTxt;
+
+                cmbPhotographer.SelectionStart = txt.Length;
+                cmbPhotographer.SelectionLength = newTxt.Length - txt.Length;
+
+            }
+
+            cmbPhotographer.DroppedDown = true;
         }
 
         #region ctxNote
@@ -129,6 +178,5 @@ namespace Extensions.PhotoAlbum
         #endregion
 
         #endregion
-
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,6 +24,9 @@ namespace Extensions.PhotoAlbum
         private DateTime _dateTaken;
         private string _photographer;
         private string _notes;
+
+        private Bitmap _thumbNail;
+        private const int ThumbSize = 90;
 
         public delegate Photograph ReadDelegate(StreamReader sr);
 
@@ -114,6 +118,26 @@ namespace Extensions.PhotoAlbum
         }
 
         public bool IsImageValid => _bitmap != InvalidImagePhoto;
+
+        public Bitmap ThumbNail
+        {
+            get
+            {
+                if (_thumbNail == null)
+                {
+                    Rectangle sr = this.ScaleToFit(new Rectangle(0, 0, ThumbSize, ThumbSize));
+                    Bitmap bm = new Bitmap(sr.Width, sr.Height);
+                    
+                    Graphics g = Graphics.FromImage(bm);
+                    GraphicsUnit u = g.PageUnit;
+                    g.DrawImage(this.Image, bm.GetBounds(ref (u)));
+
+                    _thumbNail = bm;
+                }
+
+                return _thumbNail;
+            }
+        }
 
         #endregion
 
@@ -223,6 +247,10 @@ namespace Extensions.PhotoAlbum
                 _bitmap.Dispose();
             }
 
+            if(_thumbNail != null)
+                _thumbNail.Dispose();
+
+            _thumbNail = null;
             _bitmap = null;
         }
 

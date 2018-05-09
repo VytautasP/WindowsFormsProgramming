@@ -337,6 +337,26 @@ namespace Extensions.PhotoAlbum
                 _title = Path.GetFileNameWithoutExtension(_fileName);
         }
 
+        public void MoveBefore(int i)
+        {
+            if (i > 0 && i < this.Count)
+            {
+                Photograph photo = this[i];
+                this.RemoveAt(i);
+                this.Insert(i-1, photo);
+            }
+        }
+
+        public void MoveAfter(int i)
+        {
+            if (i >= 0 && i < this.Count - 1)
+            {
+                Photograph photo = this[i];
+                this.RemoveAt(i);
+                this.Insert(i + 1, photo);
+            }
+        }
+
         #endregion
 
         #region Overrides

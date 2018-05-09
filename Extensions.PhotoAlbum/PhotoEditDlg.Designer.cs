@@ -36,7 +36,6 @@
             this.txtPhotoFile = new System.Windows.Forms.TextBox();
             this.txtCaption = new System.Windows.Forms.TextBox();
             this.txtDateTaken = new System.Windows.Forms.TextBox();
-            this.txtPhotographer = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtNote = new System.Windows.Forms.TextBox();
             this.ctxNote = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -48,13 +47,14 @@
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmbPhotographer = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.ctxNote.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.txtPhotographer);
+            this.panel1.Controls.Add(this.cmbPhotographer);
             this.panel1.Controls.Add(this.txtDateTaken);
             this.panel1.Controls.Add(this.txtCaption);
             this.panel1.Controls.Add(this.txtPhotoFile);
@@ -127,13 +127,6 @@
             this.txtDateTaken.Name = "txtDateTaken";
             this.txtDateTaken.Size = new System.Drawing.Size(176, 20);
             this.txtDateTaken.TabIndex = 5;
-            // 
-            // txtPhotographer
-            // 
-            this.txtPhotographer.Location = new System.Drawing.Point(92, 93);
-            this.txtPhotographer.Name = "txtPhotographer";
-            this.txtPhotographer.Size = new System.Drawing.Size(176, 20);
-            this.txtPhotographer.TabIndex = 7;
             // 
             // label6
             // 
@@ -228,6 +221,19 @@
             this.clearToolStripMenuItem.Text = "Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
+            // cmbPhotographer
+            // 
+            this.cmbPhotographer.FormattingEnabled = true;
+            this.cmbPhotographer.Location = new System.Drawing.Point(92, 96);
+            this.cmbPhotographer.MaxDropDownItems = 4;
+            this.cmbPhotographer.Name = "cmbPhotographer";
+            this.cmbPhotographer.Size = new System.Drawing.Size(176, 21);
+            this.cmbPhotographer.Sorted = true;
+            this.cmbPhotographer.TabIndex = 7;
+            this.cmbPhotographer.Text = "photographer";
+            this.cmbPhotographer.TextChanged += new System.EventHandler(this.cmbPhotographer_TextChanged);
+            this.cmbPhotographer.Validated += new System.EventHandler(this.cmbPhotographer_Validated);
+            // 
             // PhotoEditDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -254,7 +260,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtPhotographer;
         private System.Windows.Forms.TextBox txtDateTaken;
         private System.Windows.Forms.TextBox txtCaption;
         private System.Windows.Forms.TextBox txtPhotoFile;
@@ -269,5 +274,6 @@
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
+        private System.Windows.Forms.ComboBox cmbPhotographer;
     }
 }
