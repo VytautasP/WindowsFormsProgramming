@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.ctxMenuView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuMain = new System.Windows.Forms.MenuStrip();
             this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,6 +44,7 @@
             this.menuRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.menuPhotoProp = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuAlbumProp = new System.Windows.Forms.ToolStripMenuItem();
             this.menuView = new System.Windows.Forms.ToolStripMenuItem();
             this.menuImage = new System.Windows.Forms.ToolStripMenuItem();
             this.menuScale = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,7 +62,6 @@
             this.sbpnlFileIndex = new System.Windows.Forms.ToolStripStatusLabel();
             this.sbpnlImagePercent = new System.Windows.Forms.ToolStripStatusLabel();
             this.pnlPhoto = new System.Windows.Forms.Panel();
-            this.menuAlbumProp = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMain.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -158,7 +159,7 @@
             // 
             this.menuAdd.Name = "menuAdd";
             this.menuAdd.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.menuAdd.Size = new System.Drawing.Size(180, 22);
+            this.menuAdd.Size = new System.Drawing.Size(166, 22);
             this.menuAdd.Text = "&Add";
             this.menuAdd.Click += new System.EventHandler(this.menuAdd_Click);
             // 
@@ -166,22 +167,29 @@
             // 
             this.menuRemove.Name = "menuRemove";
             this.menuRemove.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.menuRemove.Size = new System.Drawing.Size(180, 22);
+            this.menuRemove.Size = new System.Drawing.Size(166, 22);
             this.menuRemove.Text = "&Remove";
             this.menuRemove.Click += new System.EventHandler(this.menuRemove_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(163, 6);
             // 
             // menuPhotoProp
             // 
             this.menuPhotoProp.Enabled = false;
             this.menuPhotoProp.Name = "menuPhotoProp";
-            this.menuPhotoProp.Size = new System.Drawing.Size(180, 22);
+            this.menuPhotoProp.Size = new System.Drawing.Size(166, 22);
             this.menuPhotoProp.Text = "Photo properties";
             this.menuPhotoProp.Click += new System.EventHandler(this.menuPhotoProp_Click);
+            // 
+            // menuAlbumProp
+            // 
+            this.menuAlbumProp.Name = "menuAlbumProp";
+            this.menuAlbumProp.Size = new System.Drawing.Size(166, 22);
+            this.menuAlbumProp.Text = "Album properties";
+            this.menuAlbumProp.Click += new System.EventHandler(this.menuAlbumProp_Click);
             // 
             // menuView
             // 
@@ -351,13 +359,6 @@
             this.pnlPhoto.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPhoto_Paint);
             this.pnlPhoto.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlPhoto_MouseMove);
             // 
-            // menuAlbumProp
-            // 
-            this.menuAlbumProp.Name = "menuAlbumProp";
-            this.menuAlbumProp.Size = new System.Drawing.Size(180, 22);
-            this.menuAlbumProp.Text = "Album properties";
-            this.menuAlbumProp.Click += new System.EventHandler(this.menuAlbumProp_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -367,6 +368,7 @@
             this.Controls.Add(this.pnlPhoto);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuMain);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuMain;
             this.MinimumSize = new System.Drawing.Size(510, 530);
             this.Name = "MainForm";

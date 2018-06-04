@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AlbumEditDlg));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtAlbumFile = new System.Windows.Forms.TextBox();
@@ -182,6 +183,7 @@
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.cbtnPassword);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AlbumEditDlg";
             this.Text = "Album Properties";
             this.Controls.SetChildIndex(this.panel1, 0);
