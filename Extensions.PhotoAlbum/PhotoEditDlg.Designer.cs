@@ -48,6 +48,8 @@
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmbPhotographer = new System.Windows.Forms.ComboBox();
             this.dtpDateTaken = new System.Windows.Forms.DateTimePicker();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnPrev = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.ctxNote.SuspendLayout();
             this.SuspendLayout();
@@ -62,6 +64,7 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
+            this.panel1.Location = new System.Drawing.Point(3, 38);
             this.panel1.Size = new System.Drawing.Size(278, 127);
             // 
             // label1
@@ -124,7 +127,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 146);
+            this.label6.Location = new System.Drawing.Point(0, 168);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(33, 13);
             this.label6.TabIndex = 8;
@@ -134,11 +137,11 @@
             // 
             this.txtNote.AcceptsReturn = true;
             this.txtNote.ContextMenuStrip = this.ctxNote;
-            this.txtNote.Location = new System.Drawing.Point(12, 163);
+            this.txtNote.Location = new System.Drawing.Point(12, 193);
             this.txtNote.Multiline = true;
             this.txtNote.Name = "txtNote";
             this.txtNote.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtNote.Size = new System.Drawing.Size(260, 75);
+            this.txtNote.Size = new System.Drawing.Size(260, 54);
             this.txtNote.TabIndex = 9;
             // 
             // ctxNote
@@ -235,11 +238,31 @@
             this.dtpDateTaken.Size = new System.Drawing.Size(176, 20);
             this.dtpDateTaken.TabIndex = 8;
             // 
+            // btnNext
+            // 
+            this.btnNext.Location = new System.Drawing.Point(197, 9);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(75, 23);
+            this.btnNext.TabIndex = 9;
+            this.btnNext.Text = "Next";
+            this.btnNext.UseVisualStyleBackColor = true;
+            // 
+            // btnPrev
+            // 
+            this.btnPrev.Location = new System.Drawing.Point(107, 9);
+            this.btnPrev.Name = "btnPrev";
+            this.btnPrev.Size = new System.Drawing.Size(75, 23);
+            this.btnPrev.TabIndex = 10;
+            this.btnPrev.Text = "Previous";
+            this.btnPrev.UseVisualStyleBackColor = true;
+            // 
             // PhotoEditDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 281);
+            this.Controls.Add(this.btnPrev);
+            this.Controls.Add(this.btnNext);
             this.Controls.Add(this.txtNote);
             this.Controls.Add(this.label6);
             this.Name = "PhotoEditDlg";
@@ -247,6 +270,8 @@
             this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.label6, 0);
             this.Controls.SetChildIndex(this.txtNote, 0);
+            this.Controls.SetChildIndex(this.btnNext, 0);
+            this.Controls.SetChildIndex(this.btnPrev, 0);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ctxNote.ResumeLayout(false);
@@ -276,5 +301,7 @@
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
         private System.Windows.Forms.ComboBox cmbPhotographer;
         private System.Windows.Forms.DateTimePicker dtpDateTaken;
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.Button btnPrev;
     }
 }

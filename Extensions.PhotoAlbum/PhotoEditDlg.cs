@@ -15,6 +15,7 @@ namespace Extensions.PhotoAlbum
         #region Fields
 
         private PhotoAlbum _album;
+        private int _index;
 
         #endregion
 
@@ -29,7 +30,7 @@ namespace Extensions.PhotoAlbum
         {
             InitializeComponent();
             _album = album;
-
+            _index = album.CurrentPosition;
             ResetSettings();
         }
 
@@ -39,7 +40,7 @@ namespace Extensions.PhotoAlbum
 
         protected override void ResetSettings()
         {
-            Photograph photo = _album.CurrentPhotograph;
+            Photograph photo = _album[_index];
 
             if (cmbPhotographer.Items.Count == 0)
             {
@@ -66,11 +67,14 @@ namespace Extensions.PhotoAlbum
                 txtNote.Text = photo.Notes;
                 cmbPhotographer.SelectedItem = photo.Photographer;
             }
+
+            btnNext.Enabled = _index != _album.Count - 1;
+            btnPrev.Enabled = _index != 0;
         }
 
         protected override bool SaveSettings()
         {
-            Photograph photo = _album.CurrentPhotograph;
+            Photograph photo = _album[_index];
 
             if (photo != null)
             {
@@ -105,7 +109,7 @@ namespace Extensions.PhotoAlbum
 
             if (!cmbPhotographer.Items.Contains(photographer))
             {
-                _album.CurrentPhotograph.Photographer = photographer;
+                _album[_index].Photographer = photographer;
                 cmbPhotographer.Items.Add(photographer);
             }
 
