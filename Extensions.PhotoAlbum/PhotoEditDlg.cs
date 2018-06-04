@@ -62,7 +62,7 @@ namespace Extensions.PhotoAlbum
             {
                 txtPhotoFile.Text = photo.FileName;
                 txtCaption.Text = photo.Caption;
-                txtDateTaken.Text = photo.DateTaken.ToString();
+                dtpDateTaken.Value = photo.DateTaken;
                 txtNote.Text = photo.Notes;
                 cmbPhotographer.SelectedItem = photo.Photographer;
             }
@@ -75,6 +75,7 @@ namespace Extensions.PhotoAlbum
             if (photo != null)
             {
                 photo.Caption = txtCaption.Text;
+                photo.DateTaken = dtpDateTaken.Value;
                 photo.Photographer = cmbPhotographer.Text;
                 photo.Notes = txtNote.Text;
             }

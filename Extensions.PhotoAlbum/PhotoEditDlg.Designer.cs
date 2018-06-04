@@ -35,7 +35,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtPhotoFile = new System.Windows.Forms.TextBox();
             this.txtCaption = new System.Windows.Forms.TextBox();
-            this.txtDateTaken = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtNote = new System.Windows.Forms.TextBox();
             this.ctxNote = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -48,14 +47,15 @@
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmbPhotographer = new System.Windows.Forms.ComboBox();
+            this.dtpDateTaken = new System.Windows.Forms.DateTimePicker();
             this.panel1.SuspendLayout();
             this.ctxNote.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.dtpDateTaken);
             this.panel1.Controls.Add(this.cmbPhotographer);
-            this.panel1.Controls.Add(this.txtDateTaken);
             this.panel1.Controls.Add(this.txtCaption);
             this.panel1.Controls.Add(this.txtPhotoFile);
             this.panel1.Controls.Add(this.label4);
@@ -120,13 +120,6 @@
             this.txtCaption.TabIndex = 3;
             this.txtCaption.TextChanged += new System.EventHandler(this.txtCaption_TextChanged);
             this.txtCaption.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCaption_KeyPress);
-            // 
-            // txtDateTaken
-            // 
-            this.txtDateTaken.Location = new System.Drawing.Point(92, 65);
-            this.txtDateTaken.Name = "txtDateTaken";
-            this.txtDateTaken.Size = new System.Drawing.Size(176, 20);
-            this.txtDateTaken.TabIndex = 5;
             // 
             // label6
             // 
@@ -224,7 +217,7 @@
             // cmbPhotographer
             // 
             this.cmbPhotographer.FormattingEnabled = true;
-            this.cmbPhotographer.Location = new System.Drawing.Point(92, 96);
+            this.cmbPhotographer.Location = new System.Drawing.Point(92, 93);
             this.cmbPhotographer.MaxDropDownItems = 4;
             this.cmbPhotographer.Name = "cmbPhotographer";
             this.cmbPhotographer.Size = new System.Drawing.Size(176, 21);
@@ -233,6 +226,14 @@
             this.cmbPhotographer.Text = "photographer";
             this.cmbPhotographer.TextChanged += new System.EventHandler(this.cmbPhotographer_TextChanged);
             this.cmbPhotographer.Validated += new System.EventHandler(this.cmbPhotographer_Validated);
+            // 
+            // dtpDateTaken
+            // 
+            this.dtpDateTaken.CustomFormat = "yyyy-MM-dd \'at\' hh24:mm:ss";
+            this.dtpDateTaken.Location = new System.Drawing.Point(92, 62);
+            this.dtpDateTaken.Name = "dtpDateTaken";
+            this.dtpDateTaken.Size = new System.Drawing.Size(176, 20);
+            this.dtpDateTaken.TabIndex = 8;
             // 
             // PhotoEditDlg
             // 
@@ -260,7 +261,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtDateTaken;
         private System.Windows.Forms.TextBox txtCaption;
         private System.Windows.Forms.TextBox txtPhotoFile;
         private System.Windows.Forms.Label label6;
@@ -275,5 +275,6 @@
         private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
         private System.Windows.Forms.ComboBox cmbPhotographer;
+        private System.Windows.Forms.DateTimePicker dtpDateTaken;
     }
 }
