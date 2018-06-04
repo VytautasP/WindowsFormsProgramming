@@ -42,6 +42,8 @@ namespace WindowsFormsProgramming
         {
             InitializeComponent();
             InitContextViewMenu();
+            InitToolbarButtons();
+
             menuNew_Click(this, EventArgs.Empty);
             menuImage_ChildClick(menuScale, EventArgs.Empty);
         }
@@ -273,21 +275,11 @@ namespace WindowsFormsProgramming
         {
             if (sender is ToolStripMenuItem item)
             {
-                
-                _selectedMode = (DisplayMode)(item.OwnerItem as ToolStripMenuItem).DropDownItems.IndexOf(item);
-                switch (_selectedMode)
-                {
-                    default:
-                    case DisplayMode.ScaleToFit:
-                        this.Invalidate();
-                        break;
-                    case DisplayMode.StretchImage:
-                        this.Invalidate();
-                        break;
-                    case DisplayMode.Normal:
-                        this.Invalidate();
-                        break;
-                }
+
+                var parentItem = (ToolStrip)item.Owner;
+
+                _selectedMode = (DisplayMode)parentItem.Items.IndexOf(item);
+
                 sbpnlImagePercent.Invalidate();
 
                 switch (_selectedMode)
@@ -479,16 +471,56 @@ namespace WindowsFormsProgramming
 
         #endregion
 
+        #region Context Menu Image
+
+        private void ctxMenuImage_Opening(object sender, CancelEventArgs e)
+        {
+            ContextMenuStrip menu = sender as ContextMenuStrip;
+
+            if (menu == null) return;
+
+            bool imageLoaded = _album.Count > 0;
+
+            foreach (ToolStripMenuItem item in menu.Items)
+            {
+                item.Enabled = imageLoaded;
+                item.Checked = (int) _selectedMode ==
+                               menu.Items.IndexOf(item) && imageLoaded;
+            }
+
+
+        }
+
+        #endregion
+
         #endregion
 
         #region Methods
+
+        private void InitToolbarButtons()
+        {
+            tbbNew.Tag = menuNew;
+            tbbOpen.Tag = menuOpen;
+            tbbSave.Tag = menuSave;
+            tbbPrevious.Tag = menuPrevious;
+            tbbNext.Tag = menuNext;
+            tbbImage.Tag = menuImage;
+            tbbPixelData.Tag = menuPixel;
+        }
 
         private void InitContextViewMenu()
         {
             foreach (var menuItem in menuView.DropDownItems)
             {
                 if (menuItem is ToolStripMenuItem)
+                {
                     ctxMenuView.Items.Add(ToolStripMenuItemHelper.CloneToolStripMenuItem((ToolStripMenuItem) menuItem));
+                }
+            }
+
+            foreach (var item in menuImage.DropDownItems)
+            {
+                ctxMenuImage.Items.Add(ToolStripMenuItemHelper.CloneToolStripMenuItem((ToolStripMenuItem)item));
             }
         }
 
@@ -596,8 +628,15 @@ namespace WindowsFormsProgramming
 
         }
 
+
         #endregion
 
+        private void toolbarButton_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menuItem = ((ToolStripButton) sender).Tag as ToolStripMenuItem;
+
+            menuItem?.PerformClick();
+        }
 
     }
 }
