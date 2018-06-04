@@ -16,6 +16,11 @@ namespace Extensions.PhotoAlbum
 
         private PhotoAlbum _album;
         private int _index;
+        private string _origCaption;
+        private DateTime _origDateTaken;
+        private string _origPhotographer;
+        private bool _modifiedTxtNotes;
+        private bool _hasChanged;
 
         #endregion
 
@@ -32,7 +37,14 @@ namespace Extensions.PhotoAlbum
             _album = album;
             _index = album.CurrentPosition;
             ResetSettings();
+            SetOriginalValues();
         }
+
+        #endregion
+
+        #region Properties
+
+        public bool HasChanged => _hasChanged;
 
         #endregion
 
@@ -74,6 +86,10 @@ namespace Extensions.PhotoAlbum
 
         protected override bool SaveSettings()
         {
+
+            if (!NewControlValues())
+                return true;
+
             Photograph photo = _album[_index];
 
             if (photo != null)
@@ -82,6 +98,7 @@ namespace Extensions.PhotoAlbum
                 photo.DateTaken = dtpDateTaken.Value;
                 photo.Photographer = cmbPhotographer.Text;
                 photo.Notes = txtNote.Text;
+                _hasChanged = true;
             }
 
             return true;
@@ -89,7 +106,63 @@ namespace Extensions.PhotoAlbum
 
         #endregion
 
+        #region Methods
+
+        protected bool NewControlValues()
+        {
+            bool result = _origCaption != txtCaption.Text ||
+                          _origPhotographer != cmbPhotographer.Text ||
+                          _origDateTaken != dtpDateTaken.Value ||
+                          _modifiedTxtNotes;
+
+            return result;
+        }
+
+        private void SetOriginalValues()
+        {
+            Photograph photo = _album[_index];
+
+            if (photo != null)
+            {
+                _origCaption = photo.Caption;
+                _origDateTaken = photo.DateTaken;
+                _origPhotographer = photo.Photographer;
+                _modifiedTxtNotes = false;
+            }
+        }
+
+        #endregion
+
         #region Event handlers
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            SaveSettings();
+
+            if (_index < _album.Count - 1)
+            {
+                _index++;
+                ResetSettings();
+                SetOriginalValues();
+            }
+        }
+
+        private void btnPrev_Click(object sender, EventArgs e)
+        {
+            SaveSettings();
+
+            if (_index > 0)
+            {
+                _index--;
+                ResetSettings();
+                SetOriginalValues();
+            }
+        }
+
+        private void txtNote_TextChanged(object sender, EventArgs e)
+        {
+            _modifiedTxtNotes = txtNote.Focused;
+        }
 
         private void txtCaption_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -183,5 +256,6 @@ namespace Extensions.PhotoAlbum
         #endregion
 
         #endregion
+
     }
 }

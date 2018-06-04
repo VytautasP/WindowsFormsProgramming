@@ -143,6 +143,7 @@
             this.txtNote.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtNote.Size = new System.Drawing.Size(260, 54);
             this.txtNote.TabIndex = 9;
+            this.txtNote.TextChanged += new System.EventHandler(this.txtNote_TextChanged);
             // 
             // ctxNote
             // 
@@ -246,6 +247,7 @@
             this.btnNext.TabIndex = 9;
             this.btnNext.Text = "Next";
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPrev
             // 
@@ -255,6 +257,7 @@
             this.btnPrev.TabIndex = 10;
             this.btnPrev.Text = "Previous";
             this.btnPrev.UseVisualStyleBackColor = true;
+            this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
             // 
             // PhotoEditDlg
             // 

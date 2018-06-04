@@ -119,10 +119,13 @@ namespace WindowsFormsProgramming
             {
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    _albumChanged = true;
+                    _albumChanged = dlg.HasChanged;
 
                     sbpnlFileName.Text = _album.CurrentPhotograph.Caption;
                     statusStrip1.Invalidate();
+
+                    if (_albumChanged)
+                        this.Invalidate();
                 }
             }
 
